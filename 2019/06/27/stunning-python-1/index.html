@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '7.1.2',
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
@@ -94,14 +94,18 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Python语法妙处(1)">
 <meta property="og:url" content="http://yoursite.com/2019/06/27/stunning-python-1/index.html">
 <meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-06-27T06:38:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python语法妙处(1)">
+<meta name="twitter:description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
 
 
 
@@ -222,6 +226,40 @@
         
         
           
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
 
     
@@ -240,9 +278,6 @@
       
     </ul>
   
-
-  
-    
 
   
 
@@ -264,6 +299,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -334,6 +372,24 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Computer-code-Python/" itemprop="url" rel="index"><span itemprop="name">Computer, code, Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -362,7 +418,28 @@
       
 
       
-        <a id="more"></a>
+        <p>每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。</p>
+<a id="more"></a>
+
+
+
+<p>众所周知的是Python使用<code>.</code>来连接对象和方法（C++也是如此）</p>
+<p>如<code>myClass.function()</code></p>
+<p>然而……这个是什么情况呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line">myPen = turtle.Pen()<span class="comment">#打开画布</span></span><br><span class="line">myPen.circle(<span class="number">5</span>)<span class="comment">#效果是笔画一个半径5px的圆</span></span><br></pre></td></tr></table></figure>
+
+<p>通过<code>import</code>声明的内容引入的是整个包</p>
+<p>第二行实际是<code>turtle.py</code>文件中的类<code>Pen</code>的初始化，第三行的<code>myPen</code>才是调用对象的某个方法。</p>
+<p>类似的问题更进一步就是一个关于包和类同名的糟糕情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">print(datetime.datetime.now())</span><br><span class="line"><span class="comment">#2019-06-27 15:01:09.853174</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">print(datetime.now())</span><br><span class="line"><span class="comment">#2019-06-27 15:01:09.854122第二次会晚一点，但是等效</span></span><br></pre></td></tr></table></figure>
+
+<p><code>datetime</code>包里面有个<code>datetime</code>类，于是就有了这个奇妙的情况</p>
+<blockquote>
+<p>有一个巧妙的比喻区分<code>import</code>和<code>from ... import</code></p>
+<p>前者是“把房子给我”，后者是“把房子里面的所有/某某东西给我”</p>
+<p>这个例子相当于房子里面有个叫“房子”的狗，狗可以叫，但是房子不可以叫。</p>
+</blockquote>
+
       
     </div>
 
@@ -383,6 +460,15 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
 
       
       
@@ -392,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/27/Python语法妙处-1/" rel="next" title="Python语法妙处(1)">
-                <i class="fa fa-chevron-left"></i> Python语法妙处(1)
+              <a href="/2019/06/26/blog-setup-1/" rel="next" title="博客搭建(1)">
+                <i class="fa fa-chevron-left"></i> 博客搭建(1)
               </a>
             
           </div>
@@ -401,6 +487,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/28/stunning-python-2/" rel="prev" title="Python语法妙处(2)">
+                Python语法妙处(2) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -467,7 +557,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
               
             </nav>
           
@@ -526,7 +642,7 @@
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
 
 
 
@@ -614,7 +730,9 @@
   
 
 
-  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
 
 
 
