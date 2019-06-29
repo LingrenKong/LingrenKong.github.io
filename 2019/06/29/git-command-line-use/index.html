@@ -94,18 +94,21 @@
 
 
 
-  <meta name="description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
-<meta name="keywords" content="Python">
+  <meta name="description" content="如何舒适的在Windows上使用git的命令行工具">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python语法妙处(1)">
-<meta property="og:url" content="http://yoursite.com/2019/06/27/stunning-python-1/index.html">
+<meta property="og:title" content="GIT命令行工具的入门">
+<meta property="og:url" content="http://yoursite.com/2019/06/29/git-command-line-use/index.html">
 <meta property="og:site_name" content="孔令仁的个人博客">
-<meta property="og:description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
+<meta property="og:description" content="如何舒适的在Windows上使用git的命令行工具">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-27T06:38:59.000Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/29/git-command-line-use/1561163818180.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/29/git-command-line-use/1561164295716.png">
+<meta property="og:updated_time" content="2019-06-29T09:11:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python语法妙处(1)">
-<meta name="twitter:description" content="每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。">
+<meta name="twitter:title" content="GIT命令行工具的入门">
+<meta name="twitter:description" content="如何舒适的在Windows上使用git的命令行工具">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/29/git-command-line-use/1561163818180.png">
 
 
 
@@ -113,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/06/27/stunning-python-1/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/29/git-command-line-use/">
 
 
 
@@ -123,7 +126,7 @@
   };
 </script>
 
-  <title>Python语法妙处(1) | 孔令仁的个人博客</title>
+  <title>GIT命令行工具的入门 | 孔令仁的个人博客</title>
   
 
 
@@ -322,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/stunning-python-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/git-command-line-use/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="孔令仁">
@@ -339,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python语法妙处(1)
+          <h1 class="post-title" itemprop="name headline">GIT命令行工具的入门
 
               
             
@@ -365,7 +368,7 @@
                 
               
 
-              <time title="创建时间：2019-06-27 14:38:59" itemprop="dateCreated datePublished" datetime="2019-06-27T14:38:59+08:00">2019-06-27</time>
+              <time title="创建时间：2019-06-29 17:11:28" itemprop="dateCreated datePublished" datetime="2019-06-29T17:11:28+08:00">2019-06-29</time>
             
 
             
@@ -400,27 +403,22 @@
       
 
       
-        <p>每一门语言都有着自己的魔法，而Python也不例外，今天我们就来看看Python的这个符号吧——点的妙用。</p>
+        <p>如何舒适的在Windows上使用git的命令行工具</p>
 <a id="more"></a>
 
+<h2 id="GIT-BASH"><a href="#GIT-BASH" class="headerlink" title="GIT BASH"></a>GIT BASH</h2><h3 id="了解Linux风格"><a href="#了解Linux风格" class="headerlink" title="了解Linux风格"></a>了解Linux风格</h3><p>要注意一些问题，比如说路径：</p>
+<ul>
+<li>方法1：Linux路径表示<code>c/Documents</code></li>
+<li>方法2：Windows表示（注意转义字符）<code>C:\\Documents</code></li>
+</ul>
+<h3 id="调选项"><a href="#调选项" class="headerlink" title="调选项"></a>调选项</h3><p>界面最上面部分右键可以弹出选项，修改选项可以更改很多设定</p>
+<h4 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h4><img src="/2019/06/29/git-command-line-use/1561163818180.png" title="图片">
 
+<p>UI language是界面的语言设置，选择ZH-CN就是中文了</p>
+<p>命令行的窗口大小不是绝对值，而是用行数列数调的，<strong>行数列数和当前文字大小有关系</strong>，所以我先把字体调大，然后将窗口缩放成全屏，点击<strong>当前大小</strong>，就可以得到对应的全屏时行数列数。</p>
+<h4 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h4><img src="/2019/06/29/git-command-line-use/1561164295716.png" title="图片">
 
-<p>众所周知的是Python使用<code>.</code>来连接对象和方法（C++也是如此）</p>
-<p>如<code>myClass.function()</code></p>
-<p>然而……这个是什么情况呢？</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line">myPen = turtle.Pen()<span class="comment">#打开画布</span></span><br><span class="line">myPen.circle(<span class="number">5</span>)<span class="comment">#效果是笔画一个半径5px的圆</span></span><br></pre></td></tr></table></figure>
-
-<p>通过<code>import</code>声明的内容引入的是整个包</p>
-<p>第二行实际是<code>turtle.py</code>文件中的类<code>Pen</code>的初始化，第三行的<code>myPen</code>才是调用对象的某个方法。</p>
-<p>类似的问题更进一步就是一个关于包和类同名的糟糕情况</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">print(datetime.datetime.now())</span><br><span class="line"><span class="comment">#2019-06-27 15:01:09.853174</span></span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">print(datetime.now())</span><br><span class="line"><span class="comment">#2019-06-27 15:01:09.854122第二次会晚一点，但是等效</span></span><br></pre></td></tr></table></figure>
-
-<p><code>datetime</code>包里面有个<code>datetime</code>类，于是就有了这个奇妙的情况</p>
-<blockquote>
-<p>有一个巧妙的比喻区分<code>import</code>和<code>from ... import</code></p>
-<p>前者是“把房子给我”，后者是“把房子里面的所有/某某东西给我”</p>
-<p>这个例子相当于房子里面有个叫“房子”的狗，狗可以叫，但是房子不可以叫。</p>
-</blockquote>
+<p>注意复制粘贴是<strong>Shift+Insert</strong>，不是<strong>Ctrl/+C</strong></p>
 
       
     </div>
@@ -447,7 +445,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/git/" rel="tag"># git</a>
           
         </div>
       
@@ -460,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/26/blog-setup-1/" rel="next" title="博客搭建(1)">
-                <i class="fa fa-chevron-left"></i> 博客搭建(1)
+              <a href="/2019/06/28/stunning-python-2/" rel="next" title="Python语法妙处(2)">
+                <i class="fa fa-chevron-left"></i> Python语法妙处(2)
               </a>
             
           </div>
@@ -469,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/28/stunning-python-2/" rel="prev" title="Python语法妙处(2)">
-                Python语法妙处(2) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -578,6 +581,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GIT-BASH"><span class="nav-number">1.</span> <span class="nav-text">GIT BASH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#了解Linux风格"><span class="nav-number">1.1.</span> <span class="nav-text">了解Linux风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调选项"><span class="nav-number">1.2.</span> <span class="nav-text">调选项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#界面"><span class="nav-number">1.2.1.</span> <span class="nav-text">界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快捷键"><span class="nav-number">1.2.2.</span> <span class="nav-text">快捷键</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
