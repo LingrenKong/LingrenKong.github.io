@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="如何在有C语言基础的情况下理解Python 假设C语言基础是采用《C程序设计（第四版）》 谭浩强">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在有C语言基础的情况下理解Python">
+<meta property="og:url" content="http://yoursite.com/2019/11/10/from-c-to-python/index.html">
+<meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="如何在有C语言基础的情况下理解Python 假设C语言基础是采用《C程序设计（第四版）》 谭浩强">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-21T12:47:07.958Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在有C语言基础的情况下理解Python">
+<meta name="twitter:description" content="如何在有C语言基础的情况下理解Python 假设C语言基础是采用《C程序设计（第四版）》 谭浩强">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/11/10/from-c-to-python/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>在有C语言基础的情况下理解Python | 孔令仁的个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">孔令仁的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/10/from-c-to-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="孔令仁">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="孔令仁的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在有C语言基础的情况下理解Python
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-10 20:47:10" itemprop="dateCreated datePublished" datetime="2019-11-10T20:47:10+08:00">2019-11-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-21 20:47:07" itemprop="dateModified" datetime="2019-11-21T20:47:07+08:00">2019-11-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如何在有C语言基础的情况下理解Python</p>
+<p>假设C语言基础是采用《C程序设计（第四版）》 谭浩强 </p>
+<a id="more"></a>
+
+<h1 id="概念比较"><a href="#概念比较" class="headerlink" title="概念比较"></a>概念比较</h1><p>学完C一年之后再去翻C语言的基础书，才发现似乎书上真的没有讲什么……</p>
+<p>目录：</p>
+<ul>
+<li>程序设计和C语言</li>
+<li>算法——程序的灵魂 </li>
+<li>简单的C程序设计——顺序程序设计 </li>
+<li>选择结构程序设计 </li>
+<li>循环结构程序设计 </li>
+<li>利用数组处理批量数据 </li>
+<li>用函数实现模块化程序设计 </li>
+<li>善于利用指针 </li>
+<li>用户自己建立数据类型 </li>
+<li>对文件的输入输出 </li>
+</ul>
+<p>对应的内容：</p>
+<ul>
+<li><a href="#语言特性">脚本语言、面向对象</a></li>
+<li><a href="#算法">算法</a></li>
+<li><a href="#选择与循环">Python的选择与循环</a></li>
+<li>Python的内置数据类型【可以看菜鸟教程或者官方文档等】</li>
+<li>Python函数【可以看菜鸟教程或者官方文档等】</li>
+<li><a href="#C的指针与Python变量">没有指针，但是有类似的逻辑</a></li>
+<li>Python的类【可以看菜鸟教程或者官方文档等】</li>
+<li><a href="#文件、输入输出、路径">文件、输入输出、路径</a></li>
+</ul>
+<h2 id="语言特性"><a href="#语言特性" class="headerlink" title="语言特性"></a>语言特性</h2><p>对于Python最深刻的理解莫过于这个了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> this</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">The Zen of Python, by Tim Peters</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Beautiful is better than ugly.</span></span><br><span class="line"><span class="string">Explicit is better than implicit.</span></span><br><span class="line"><span class="string">Simple is better than complex.</span></span><br><span class="line"><span class="string">Complex is better than complicated.</span></span><br><span class="line"><span class="string">Flat is better than nested.</span></span><br><span class="line"><span class="string">Sparse is better than dense.</span></span><br><span class="line"><span class="string">Readability counts.可读性很重要！</span></span><br><span class="line"><span class="string">Special cases aren't special enough to break the rules.</span></span><br><span class="line"><span class="string">Although practicality beats purity.</span></span><br><span class="line"><span class="string">Errors should never pass silently.</span></span><br><span class="line"><span class="string">Unless explicitly silenced.</span></span><br><span class="line"><span class="string">In the face of ambiguity, refuse the temptation to guess.</span></span><br><span class="line"><span class="string">There should be one-- and preferably only one --obvious way to do it.</span></span><br><span class="line"><span class="string">Although that way may not be obvious at first unless you're Dutch.</span></span><br><span class="line"><span class="string">Now is better than never.</span></span><br><span class="line"><span class="string">Although never is often better than *right* now.</span></span><br><span class="line"><span class="string">If the implementation is hard to explain, it's a bad idea.</span></span><br><span class="line"><span class="string">If the implementation is easy to explain, it may be a good idea.</span></span><br><span class="line"><span class="string">Namespaces are one honking great idea -- let's do more of those!</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+
+<p>Python的语言特性很多，如果说和C对比的话，最大的区别是三点：</p>
+<ul>
+<li>脚本语言</li>
+<li>动态类型</li>
+<li>面向对象</li>
+</ul>
+<h3 id="脚本语言"><a href="#脚本语言" class="headerlink" title="脚本语言"></a>脚本语言</h3><p>脚本语言不需要编译，可以直接用，由解释器来负责解释 </p>
+<p>所以说相比于C，你不需要进行编译，也不因为编译失败而心态爆炸</p>
+<p>使用解释器，意味着你可以运行你代码的部分，即使后面还没有写完（但是这不代表你可以跳过使用某个变量的语句直接运行后面的语句）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var = <span class="string">"变量赋值"</span></span><br><span class="line">var = <span class="number">1</span></span><br><span class="line">print(var)</span><br></pre></td></tr></table></figure>
+
+<p>如果你上来就<code>run cell(Spyder的一个按钮，可以运行选定部分)</code>，那就会<code>NameError: name &#39;var&#39; is not defined</code>，提示你没有定义变量<code>var</code>。</p>
+<p>如果你运行整个程序，那么就会输出1（动态类型后面再说）</p>
+<p>如果你先运行第一句，然后跳过第二个，单独运行第三句，那么就会输出<code>变量赋值</code></p>
+<p>脚本语言使得写代码时，能够人机即时交互，但是代价是解释器会存下太多东西，速度和内存管理不太行（但是我们暂时不必在意这点）</p>
+<h3 id="动态变量"><a href="#动态变量" class="headerlink" title="动态变量"></a>动态变量</h3><p>相比于C，动态变量这件事可以说是喜忧参半。</p>
+<ul>
+<li>忧在没有人管你的变量操作了，没有严格定义的变量有时候会出问题</li>
+<li>喜在你不需要具体的一个个定义变量，只需要写出变量名赋值即可</li>
+</ul>
+<p>严格来讲，动态变量类型不代表你就可以随便更改变量的类型。因为变量的数据类型不定，所以你可能会搞出一些迷惑操作，尤其Python特别擅长重载各种操作，所以你并不会因为错误的数据类型而得到Error：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">"请输入一个数字a:"</span>)</span><br><span class="line">b = input(<span class="string">"请输入一个数字b:"</span>)</span><br><span class="line">print(<span class="string">'a+b的结果是：'</span>,a+b)</span><br><span class="line"></span><br><span class="line"><span class="comment">#请输入一个数字a:1</span></span><br><span class="line"><span class="comment">#请输入一个数字b:2</span></span><br><span class="line"><span class="comment">#a+b的结果是： 12</span></span><br></pre></td></tr></table></figure>
+
+<p><code>a+b</code>看起来很正常，然而input输进去的是字符串，所以<code>+</code>是字符串的连接方法，你得到的是两个字符直接相连，而不是数字加法。</p>
+<p>因此最好不要用<code>i</code>这种看起来就像循环变量的东西来存字符串，会让其他人懵的</p>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>【致某些同学（包含我自己）：面向对象编程不要求你先找个对象】</p>
+<p> 面向对象是相对于面向过程来讲的，面向对象方法，把相关的数据和方法组织为一个整体来看待，从更高的层次来进行系统建模，更贴近事物的自然运行模式。</p>
+<p>简而言之：之前写个<code>main()</code>函数，现在要写<code>class xxx</code>，函数还是要写，但是一般组织在一个类里面</p>
+<p>如果你对面向对象暂时不太了解，也可以继续使用C的面向过程编程，继续写函数。</p>
+<p>下面是个简单的例子，看不懂也不要太担心（因为<code>self</code>这种东西就是个符号而已）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function</span><span class="params">(name)</span>:</span></span><br><span class="line">    print(name)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        self.n = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">function1</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        print(name)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">function2</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">	function(<span class="string">"学Python"</span>)</span><br><span class="line">	klr = People(<span class="string">"klr"</span>)</span><br><span class="line">	klr.function2()</span><br><span class="line">	klr.function1(<span class="string">"好好学习"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>算法在每种语言都是相同的，但是在Python做程序练习的时候，你可以总找到捷径</p>
+<p>比如说处理重复数据的时候，可以用<code>set</code>直接搞定：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">listRaw = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line">print(list(set(listRaw)))</span><br><span class="line"><span class="comment"># [1, 2, 3, 5]</span></span><br></pre></td></tr></table></figure>
+
+<p>【这就是为啥Python相关广告都有“X行代码搞定”的标题】</p>
+<h2 id="选择与循环"><a href="#选择与循环" class="headerlink" title="选择与循环"></a>选择与循环</h2><p>参考<a href="https://www.runoob.com/python3/python3-conditional-statements.html" target="_blank" rel="noopener">菜鸟教程</a>可以了解基本的Python分支和循环语句</p>
+<p>相比于C语言，可能更需要注意的是，Python对于循环的彻底认知是比较有难度的（这要感谢Python基本数据的特性）</p>
+<p>最明显的一点是，当我们使用<code>for</code>循环，会发现这个句子并不是简单的<code>i++</code>逻辑（当然你可以用while来做，那么就是<code>i++</code>的方式了）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i in range(10):</span><br><span class="line">	print(i)</span><br></pre></td></tr></table></figure>
+
+<p>我们发现Python的for语句和C最根本的不同在于，C语言的while和for本质上差不多，可以互相改写，但是Python的for使用了<code>in</code>这个符号。</p>
+<p>深入讲解这个问题需要涉及到迭代器、生成器，我们暂时不讲那么深，只是提出来：</p>
+<ul>
+<li>range可以当做C语言循环的模式来理解，但是实质不同</li>
+<li>in还可以用在其他东西上，逐个遍历，比如字符串、列表、元组（他们统称可迭代对象）</li>
+</ul>
+<h2 id="C的指针与Python变量"><a href="#C的指针与Python变量" class="headerlink" title="C的指针与Python变量"></a>C的指针与Python变量</h2><p>相信大家在学习C的时候老师都会强调C的重要性，其中比较常被强调的一点就是指针可以锻炼思维和节省空间。</p>
+<p>相信大家都知道Python是没有指针的，有的同学也为此松了一口气，但是……不幸的是，如果你在学C的时候没学明白指针，那么接下来的部分还是会让你感到迷惑。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">3</span>*x+<span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">5</span>)]<span class="comment">#列表生成式可以先不必理解</span></span><br><span class="line">b = a</span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line">a[<span class="number">2</span>] = <span class="string">"为什么会这样"</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line"><span class="comment"># a: [1, 4, 7, 10, 13] b: [1, 4, 7, 10, 13]</span></span><br><span class="line"><span class="comment"># a: [1, 4, '为什么会这样', 10, 13] b: [1, 4, '为什么会这样', 10, 13]</span></span><br></pre></td></tr></table></figure>
+
+<p>对比一下C语言什么时候会发生类似情况：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> *a=<span class="literal">NULL</span>,*b=<span class="literal">NULL</span>;</span><br><span class="line">	a = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*<span class="number">2</span>);b = a;</span><br><span class="line">	a[<span class="number">0</span>] = <span class="number">1</span>;a[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a:%d,%d\n"</span>,a[<span class="number">0</span>],a[<span class="number">1</span>]);</span><br><span class="line">	b[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"a:%d,%d\n"</span>,a[<span class="number">0</span>],a[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出：</span></span><br><span class="line"><span class="comment">//a:1,2</span></span><br><span class="line"><span class="comment">//a:0,2</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是说，如果你的变量是数、元组这种不可以更改的对象，那么万事大吉，可以直接用赋值。但是如果使用的是可变对象，比如列表，那么其实当你把一个变量赋值给另一个变量的时候，你其实是在类似于复制一个指针，并没有复制数据。</p>
+<p>如果从一个比较Python的方式来理解，一般是说，变量名是“一个贴纸”，而数据是格子，格子可以任意贴贴纸。仅仅是为了方便你理解和称呼某个数据，而解释器会根据你的变量对应的位置去找数据，这个过程任何语言都一样。</p>
+<p>因此Python的变量可以贴来贴去，也可以一堆标签贴在同一个格子（赋值时候发生的事情就是这个）。</p>
+<p>那么怎么处理这个问题呢？我们就需要引入两个函数<code>copy()和deepcopy()</code></p>
+<p><code>copy()</code>是内置功能（其实是类的方法<code>__copy__(self)</code>），不需要调用包</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">3</span>*x+<span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">b = a.copy()<span class="comment">#这是一个基本的内置方法，不需要调包</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line">a[<span class="number">2</span>] = <span class="string">"为什么会这样"</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line"><span class="comment">#a: [1, 4, 7, 10, 13] b: [1, 4, 7, 10, 13]</span></span><br><span class="line"><span class="comment">#a: [1, 4, '为什么会这样', 10, 13] b: [1, 4, 7, 10, 13]</span></span><br></pre></td></tr></table></figure>
+
+<p>但是有时候仅仅是copy还不够用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,[<span class="number">1</span>]]</span><br><span class="line">b = a.copy()</span><br><span class="line">a[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">"啊！"</span><span class="comment">#在列表里面的列表被复制的时候简单的把列表的位置复制了，所以a和b虽然不同，但是他们含有同一个列表</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line">a[<span class="number">1</span>] = <span class="string">"为什么会这样"</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line"><span class="comment">#a: [1, 2, ['啊！']] b: [1, 2, ['啊！']]</span></span><br><span class="line"><span class="comment">#a: [1, '为什么会这样', ['啊！']] b: [1, 2, ['啊！']]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#处理方式：</span></span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,[<span class="number">1</span>]]</span><br><span class="line">b = copy.deepcopy(a)</span><br><span class="line">a[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">"啊！"</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line">a[<span class="number">1</span>] = <span class="string">"为什么会这样"</span></span><br><span class="line">print(<span class="string">"a:"</span>,a,<span class="string">"b:"</span>,b)</span><br><span class="line"><span class="comment">#a: [1, 2, ['啊！']] b: [1, 2, [1]]</span></span><br><span class="line"><span class="comment">#a: [1, '为什么会这样', ['啊！']] b: [1, 2, [1]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文件、输入输出、路径"><a href="#文件、输入输出、路径" class="headerlink" title="文件、输入输出、路径"></a>文件、输入输出、路径</h2><p>参考：</p>
+<ul>
+<li><a href="https://www.runoob.com/python3/python3-inputoutput.html" target="_blank" rel="noopener">菜鸟教程</a></li>
+<li>官方文档（建议英语水平要够）<ul>
+<li>仅仅使用open函数：<a href="https://docs.python.org/3/library/functions.html#open" target="_blank" rel="noopener">https://docs.python.org/3/library/functions.html#open</a></li>
+<li>路径操作：<a href="https://docs.python.org/3/library/os.path.html#module-os.path" target="_blank" rel="noopener">https://docs.python.org/3/library/os.path.html#module-os.path</a></li>
+</ul>
+</li>
+<li>pathlib： <a href="https://docs.python.org/3/library/pathlib.html" target="_blank" rel="noopener">https://docs.python.org/3/library/pathlib.html</a> <ul>
+<li><a href="https://www.python.org/dev/peps/pep-0428/#abstract" target="_blank" rel="noopener">PEP428</a>提出了建议，将pathlib这个对象式的第三方库加入到标准库之中</li>
+<li>从Python 3.6开始，pathlib模块在整个标准库中得到支持</li>
+</ul>
+</li>
+<li>pickle模块</li>
+</ul>
+<h3 id="input函数："><a href="#input函数：" class="headerlink" title="input函数："></a>input函数：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> randint</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">guess</span><span class="params">(start,end)</span>:</span></span><br><span class="line">    a = randint(start,end)</span><br><span class="line">    guess = <span class="number">-1</span></span><br><span class="line">    iterCount = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> iterCount&lt;end-start+<span class="number">1</span> <span class="keyword">and</span> guess != a:</span><br><span class="line">        guess = int(input(<span class="string">"猜数游戏，这个数字a可以取从&#123;0&#125;到&#123;1&#125;:"</span>.format(start,end)))</span><br><span class="line">        iterCount += <span class="number">1</span></span><br><span class="line">    print(<span class="string">'恭喜猜对啦！'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    guess(<span class="number">1</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串格式化输出："><a href="#字符串格式化输出：" class="headerlink" title="字符串格式化输出："></a>字符串格式化输出：</h3><p>Python尽管有着十分友好的输出语法<code>print</code>，但是有些时候还是需要格式化输出字符串的功能。</p>
+<p>在Python中主要有四种格式化字符串的方法：</p>
+<p>第一种是类似于C的方法，在旧Python2中常用</p>
+<p>注意和C的区别在于<code>%</code>后面只接受单一参数，多个输入要用元组打包。如果担心参数太多容易乱，可以使用关键字和字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">name = <span class="string">'李狗蛋'</span></span><br><span class="line">age = <span class="number">18</span></span><br><span class="line">print(<span class="string">"我的名字是%s"</span>%name)<span class="comment">#在字符后面接上%，这个整体是一个格式化字符串，不一定要print出来</span></span><br><span class="line">t = <span class="string">"我的名字是%s"</span>%name</span><br><span class="line">print(<span class="string">'格式化作用于字符串而不是print:'</span>,t)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"我的名字是%s，我的年龄是%d"</span>%(name,age))<span class="comment">#元组打包格式化</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"我的名字是%(na)s，我的年龄是%(ag)d"</span>%&#123;<span class="string">'ag'</span>:age,<span class="string">'na'</span>:name&#125;)<span class="comment">#注意前面是（）括号，后面字典才是&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>第二种是Python3字符串方法</p>
+<p>这是通过为字符串对象内置<code>.format</code>方法实现的</p>
+<p>可以用<code>help(&quot; &quot;.format)/help(str.format)</code>直接看函数简介</p>
+<ul>
+<li><code>str</code>整体的文档在<a href="https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str" target="_blank" rel="noopener">https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str</a></li>
+<li>格式化字符串的网址在<a href="https://docs.python.org/3/library/string.html#formatstrings" target="_blank" rel="noopener">https://docs.python.org/3/library/string.html#formatstrings</a></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"count &#123;0&#125; &#123;1&#125; &#123;2&#125;"</span>.format(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="comment"># format()内的东西采用逗号分隔，相当于作为一个元组输入，而前面&#123;&#125;里面的序号对应元组的位序</span></span><br><span class="line">print(<span class="string">"count &#123;&#125; &#123;&#125; &#123;&#125;"</span>.format(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))<span class="comment"># 不写就按默认顺序</span></span><br><span class="line">print(<span class="string">"&#123;0[1]&#125; &#123;1.__doc__&#125;"</span>.format([<span class="number">1</span>,<span class="number">2</span>],<span class="string">"lower"</span>))<span class="comment">#输入数据对象可以再进行.(调用属性)或者[]操作</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># *对可迭代对象的解包 https://www.python.org/dev/peps/pep-3132/</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">python的len函数是一个很有用的函数，对字符也有多个功能</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">string = <span class="string">"中文字符串的len😀"</span></span><br><span class="line">print(len(string),<span class="string">'中文英文都是按一个字计算的'</span>) <span class="comment">#10</span></span><br><span class="line">print(len(string.encode(<span class="string">'utf-8'</span>)),<span class="string">'中文6*3+英文3*1+1*4=25（英文不会被转换为utf8代码）'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">字符串对象有几个比较重要的内置方法</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">s = <span class="string">"I love programming"</span></span><br><span class="line">s.title()<span class="comment"># 'I Love Programming'</span></span><br><span class="line">s.lower()<span class="comment"># 'i love programming'</span></span><br><span class="line">s.upper()<span class="comment"># 'I LOVE PROGRAMMING'</span></span><br></pre></td></tr></table></figure>
+
+<p>第三种方式：<code>f-string</code></p>
+<p>f字符串这个思路比较清奇，因为他不需要你去安排数据是啥这个问题（前面两种都需要把数据写在某些位置），你只要写变量名就可以自动让Python帮你找需要替换什么。</p>
+<p>P.S.这个思路有点像Django框架对于变量的替换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">'找'</span></span><br><span class="line">a = <span class="string">'我'</span></span><br><span class="line">str = <span class="string">f"你猜接下来输出是？<span class="subst">&#123;a&#125;</span>"</span></span><br><span class="line">print(str)</span><br><span class="line"><span class="comment">#你猜接下来输出是？我</span></span><br></pre></td></tr></table></figure>
+
+<p>第四个方式<code>string.Template.substitute</code></p>
+<p>使用有点复杂，但是好处是可以封装特点的替换方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> string <span class="keyword">import</span> Template</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demoTemplate</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="comment">#创建一个实例tmp</span></span><br><span class="line">  myTemplate = Template(<span class="string">"斐波那契数列第$&#123;a&#125;项：$&#123;b&#125;"</span>)</span><br><span class="line">  feb = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">21</span>]</span><br><span class="line">  i = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> val <span class="keyword">in</span> feb:</span><br><span class="line">    result= myTemplate.substitute(a=i,b=val)<span class="comment">#给相应的key（键）赋值，返回格式化的字符串</span></span><br><span class="line">    print(result)</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">demoTemplate()<span class="comment">#运行</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="如何写注释"><a href="#如何写注释" class="headerlink" title="如何写注释"></a>如何写注释</h2><p>一个比较好的代码是需要有注释的，而且Python有个很强大的功能是可以自动为你生成用户文档，只需要用<code>help</code>函数即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    展现如何给自己的代码留下可以方便重用的注释</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">demoPrint</span><span class="params">(self,inputVal:str=<span class="string">'默认打印这个'</span>)</span>-&gt;<span class="keyword">None</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        一个展示打印用的函数</span></span><br><span class="line"><span class="string">        按照定义要求inputVal输入的是str，并且返回None</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        print(<span class="string">'&gt;'</span>)</span><br><span class="line">        print(inputVal)</span><br><span class="line">        print()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> howToWriteNote</span><br><span class="line">    print(help(howToWriteNote))</span><br><span class="line">    print()</span><br><span class="line">    demo = Demo()</span><br><span class="line">    demo.demoPrint()</span><br><span class="line">    demo.demoPrint(<span class="string">'输出指定内容'</span>)</span><br><span class="line">    demo.demoPrint((<span class="string">'注意到输入并不符合定义式也可以运行'</span>,<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/09/blog-setup-2/" rel="next" title="博客搭建(2)">
+                <i class="fa fa-chevron-left"></i> 博客搭建(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">孔令仁</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念比较"><span class="nav-number">1.</span> <span class="nav-text">概念比较</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语言特性"><span class="nav-number">1.1.</span> <span class="nav-text">语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本语言"><span class="nav-number">1.1.1.</span> <span class="nav-text">脚本语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态变量"><span class="nav-number">1.1.2.</span> <span class="nav-text">动态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象"><span class="nav-number">1.1.3.</span> <span class="nav-text">面向对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">1.2.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择与循环"><span class="nav-number">1.3.</span> <span class="nav-text">选择与循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C的指针与Python变量"><span class="nav-number">1.4.</span> <span class="nav-text">C的指针与Python变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件、输入输出、路径"><span class="nav-number">1.5.</span> <span class="nav-text">文件、输入输出、路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#input函数："><span class="nav-number">1.5.1.</span> <span class="nav-text">input函数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串格式化输出："><span class="nav-number">1.5.2.</span> <span class="nav-text">字符串格式化输出：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何写注释"><span class="nav-number">1.6.</span> <span class="nav-text">如何写注释</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孔令仁</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
