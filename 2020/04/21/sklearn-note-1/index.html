@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="翻译并学习sklearn梯度下降回归 原文文档https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html">
+<meta name="keywords" content="Python,Sklearn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sklearn翻译学习笔记(1) 梯度下降回归">
+<meta property="og:url" content="http://yoursite.com/2020/04/21/sklearn-note-1/index.html">
+<meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="翻译并学习sklearn梯度下降回归 原文文档https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-04-21T13:40:48.291Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sklearn翻译学习笔记(1) 梯度下降回归">
+<meta name="twitter:description" content="翻译并学习sklearn梯度下降回归 原文文档https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/04/21/sklearn-note-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>sklearn翻译学习笔记(1) 梯度下降回归 | 孔令仁的个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">孔令仁的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/sklearn-note-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="孔令仁">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="孔令仁的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sklearn翻译学习笔记(1) 梯度下降回归
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-21 18:03:04 / 修改时间：21:40:48" itemprop="dateCreated datePublished" datetime="2020-04-21T18:03:04+08:00">2020-04-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>翻译并学习sklearn梯度下降回归</p>
+<p>原文文档<a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html" target="_blank" rel="noopener">https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html</a></p>
+<a id="more"></a>
+
+<h1 id="梯度下降概念介绍"><a href="#梯度下降概念介绍" class="headerlink" title="梯度下降概念介绍"></a>梯度下降概念介绍</h1><p>对于机器学习的线性模型，有两种解法，一种是最小二乘法（矩阵乘法计算），另一种是对代价函数进行梯度下降求最小值点。</p>
+<h1 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h1><h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sklearn</span>.<span class="title">linear_model</span>.<span class="title">SGDRegressor</span><span class="params">(loss=<span class="string">'squared_loss'</span>, penalty=<span class="string">'l2'</span>, alpha=<span class="number">0.0001</span>, l1_ratio=<span class="number">0.15</span>, fit_intercept=True, max_iter=<span class="number">1000</span>, tol=<span class="number">0.001</span>, shuffle=True, verbose=<span class="number">0</span>, epsilon=<span class="number">0.1</span>, random_state=None, learning_rate=<span class="string">'invscaling'</span>, eta0=<span class="number">0.01</span>, power_t=<span class="number">0.25</span>, early_stopping=False, validation_fraction=<span class="number">0.1</span>, n_iter_no_change=<span class="number">5</span>, warm_start=False, average=False)</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Linear model fitted by minimizing a regularized empirical loss with SGD</p>
+<p>通过使用SGD最小化正则经验损失来拟合线性模型</p>
+<p>SGD stands for <strong>Stochastic Gradient Descent</strong>: the gradient of the loss is estimated each sample at a time and the model is updated along the way with a decreasing strength schedule (aka learning rate).</p>
+<p>SGD代表随机梯度下降：一次估计每个样本的损失梯度，更新模型的过程伴随“强度进度表”（即学习率）的降低。</p>
+<p>【注：学习率逐步降低有助于SGD收敛】</p>
+<p>The <strong>regularizer</strong> is a penalty added to the loss function that shrinks model parameters towards the zero vector using either the squared euclidean norm L2 or the absolute norm L1 or a combination of both (Elastic Net). <em>If the parameter update crosses the 0.0 value because of the regularizer, the update is truncated to 0.0 to allow for learning sparse models and achieve online feature selection.</em></p>
+<p><strong>正则化</strong>是对损失函数的一种惩罚，它使用平方的欧几里德范数$L_2$，或绝对范数$L_1$，或两者的组合（弹性网），将模型参数向$\vec 0$收缩。</p>
+<p>斜体那句比较复杂……</p>
+<p>【正则化的思路在于认为参数比较小可以避免过拟合】</p>
+<p>This implementation works with data represented as dense numpy arrays of floating point values for the features.</p>
+<p>此实现适用于稠密的、元素为浮点值的numpy数组。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line">n_samples, n_features = <span class="number">10</span>, <span class="number">5</span></span><br><span class="line">rng = np.random.RandomState(<span class="number">0</span>)<span class="comment"># 设置随机数种子</span></span><br><span class="line">y = rng.randn(n_samples)</span><br><span class="line">X = rng.randn(n_samples, n_features) <span class="comment">#随机生成的数据（也可以换成实际数据）</span></span><br><span class="line">clf = linear_model.SGDRegressor(max_iter=<span class="number">1000</span>, tol=<span class="number">1e-3</span>)<span class="comment">#类的实例</span></span><br><span class="line">clf.fit(X, y)<span class="comment">#拟合模型</span></span><br><span class="line">---</span><br><span class="line">print(<span class="string">'系数：'</span>,clf.coef_,<span class="string">'截距：'</span>,clf.intercept_)</span><br><span class="line">y_pred = clf.predict(X)<span class="comment">#给定x预测y</span></span><br><span class="line">print(<span class="string">'数据的R2 score（不是损失，是R2）：'</span>,clf.score(X, y))</span><br></pre></td></tr></table></figure>
+
+<h2 id="回归器的参数-常用部分"><a href="#回归器的参数-常用部分" class="headerlink" title="回归器的参数(常用部分)"></a>回归器的参数(常用部分)</h2><h3 id="损失"><a href="#损失" class="headerlink" title="损失"></a>损失</h3><p><strong>loss损失函数：str, default=’squared_loss’</strong></p>
+<p>可行的有：‘squared_loss’, ‘huber’, ‘epsilon_insensitive’, or ‘squared_epsilon_insensitive’</p>
+<p>The ‘squared_loss’ refers to the ordinary least squares fit. 就是标准平方损失</p>
+<p>‘huber’ modifies ‘squared_loss’ to focus less on getting outliers correct by switching from squared to linear loss past a distance of epsilon.超过某一距离$\epsilon $改为线性损失，从而减少outlier的干扰</p>
+<p> ‘epsilon_insensitive’ ignores errors less than epsilon and is linear past that; this is the loss function used in SVR（支持向量回归算法）.低于$\epsilon $的忽略，超过的是线性损失，应用于SVR算法</p>
+<p> ‘squared_epsilon_insensitive’ is the same but becomes squared loss past a tolerance of epsilon.</p>
+<p><strong>epsilon损失函数配套的$\epsilon$：float, default=0.1</strong></p>
+<h3 id="惩罚（正则化）"><a href="#惩罚（正则化）" class="headerlink" title="惩罚（正则化）"></a>惩罚（正则化）</h3><p><strong>penalty惩罚函数:{‘l2’, ‘l1’, ‘elasticnet’}, default=’l2’</strong></p>
+<p>The penalty (aka regularization term) to be used. Defaults to ‘l2’ which is the standard regularizer for linear SVM models. ‘l1’ and ‘elasticnet’ might bring sparsity to the model (feature selection) not achievable with ‘l2’.</p>
+<p>默认惩罚是$L_2$，如果用弹性网或者$L_1 $，会使得参数具有稀疏性–比较多的参数为0</p>
+<p><strong>l1_ratio弹性网配套：float, default=0.15</strong></p>
+<p>The Elastic Net mixing parameter, with 0 &lt;= l1_ratio &lt;= 1. l1_ratio=0 corresponds to L2 penalty, l1_ratio=1 to L1.</p>
+<p><strong>alpha正则化系数：float, default=0.0001</strong></p>
+<p>Constant that multiplies the regularization term. Also used to compute learning_rate when set to ‘optimal’.</p>
+<h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><p><strong>learning_rate学习率变动方法：string, default=’invscaling’</strong></p>
+<p>The learning rate schedule:</p>
+<ul>
+<li><p>‘constant’:恒定</p>
+<p>$\eta = \eta_0$</p>
+</li>
+<li><p>‘optimal’:</p>
+<p>$\eta = \frac{1}{\alpha * (t + t_0)} $where t0 is chosen by a heuristic proposed by Leon Bottou.</p>
+</li>
+<li><p>‘invscaling’: [default]</p>
+<p>$\eta = \frac{\eta_0}{ t^ {power~t}}$</p>
+</li>
+<li><p>‘adaptive’:</p>
+<p>$\eta = \eta_0$ as long as the training keeps decreasing. Each time n_iter_no_change consecutive epochs fail to decrease the training loss by tol or fail to increase validation score by tol if early_stopping is True, the current learning rate is divided by 5.每次达到上述条件后学习率除5</p>
+</li>
+</ul>
+<p><strong>eta0：double, default=0.01</strong></p>
+<p>The initial learning rate for the ‘constant’, ‘invscaling’ or ‘adaptive’ schedules. The default value is 0.01.</p>
+<p><strong>power_t是optimal方法的参数：double, default=0.25</strong></p>
+<h3 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h3><p><strong>max_iter最大迭代数：int, default=1000</strong></p>
+<p>The maximum number of passes over the training data (aka epochs). It only impacts the behavior in the <code>fit</code> method, and not the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor.partial_fit" target="_blank" rel="noopener"><code>partial_fit</code></a> method.</p>
+<p>只对fit方法生效</p>
+<p><strong>tol阈值：loat, default=1e-3</strong></p>
+<p>The stopping criterion. If it is not None, the iterations will stop when (loss &gt; best_loss - tol) for <code>n_iter_no_change</code> consecutive epochs.</p>
+<p>停止迭代的阈值</p>
+<p><strong>random_state随机种子：nt, RandomState instance, default=None</strong></p>
+<p>The seed of the pseudo random number generator to use when shuffling the data. If int, random_state is the seed used by the random number generator; If RandomState instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by <code>np.random</code>.</p>
+<p>可以是int–数值种子；或者一个RandomState对象，用它产随机数；None则默认的numpy随机数</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Sklearn/" rel="tag"># Sklearn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/07/python-networkx-1/" rel="next" title="networkx学习笔记（1）">
+                <i class="fa fa-chevron-left"></i> networkx学习笔记（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/21/sql-shit-1/" rel="prev" title="坑爹SQL(1)">
+                坑爹SQL(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">孔令仁</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降概念介绍"><span class="nav-number">1.</span> <span class="nav-text">梯度下降概念介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机梯度下降"><span class="nav-number">2.</span> <span class="nav-text">随机梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数定义"><span class="nav-number">2.1.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">2.3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归器的参数-常用部分"><span class="nav-number">2.4.</span> <span class="nav-text">回归器的参数(常用部分)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失"><span class="nav-number">2.4.1.</span> <span class="nav-text">损失</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#惩罚（正则化）"><span class="nav-number">2.4.2.</span> <span class="nav-text">惩罚（正则化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习率"><span class="nav-number">2.4.3.</span> <span class="nav-text">学习率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算"><span class="nav-number">2.4.4.</span> <span class="nav-text">计算</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孔令仁</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
