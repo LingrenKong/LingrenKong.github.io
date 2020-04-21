@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="孔令仁的个人博客">
 <meta property="og:description" content="SQL的一个坑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-21T11:58:51.347Z">
+<meta property="og:updated_time" content="2020-04-21T13:49:00.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="坑爹SQL(1)">
 <meta name="twitter:description" content="SQL的一个坑">
@@ -365,7 +365,7 @@
                 
               
 
-              <time title="创建时间：2020-04-21 19:43:31 / 修改时间：19:58:51" itemprop="dateCreated datePublished" datetime="2020-04-21T19:43:31+08:00">2020-04-21</time>
+              <time title="创建时间：2020-04-21 19:43:31 / 修改时间：21:49:00" itemprop="dateCreated datePublished" datetime="2020-04-21T19:43:31+08:00">2020-04-21</time>
             
 
             
@@ -447,6 +447,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnxn = pyodbc.connect(<span class="string">'DRIVER=&#123;ODBC Driver 17 for SQL Server&#125;;SERVER='</span>+server+<span class="string">';DATABASE='</span>+database+<span class="string">';UID='</span>+username+<span class="string">';PWD='</span>+ password +<span class="string">';CHARSET=GBK;Trusted_Connection=yes;'</span>)</span><br></pre></td></tr></table></figure>
 
 <p>Trusted_Connection=yes是一个重要的项，有些电脑可以不用，但是如果你发现在manage studio也无法用账号密码登录，必须在高级（options）添加一个Trusted_Connection=yes才登录成功，那么说明你的server一般只接受Windows认证，必须修改条件才能账号密码登录。</p>
+<p>两个参考文档：</p>
+<p><a href="https://docs.microsoft.com/en-us/openspecs/sql_server_protocols/ms-odbcstr/864608a0-29e9-4766-9505-58c336bcd762" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/openspecs/sql_server_protocols/ms-odbcstr/864608a0-29e9-4766-9505-58c336bcd762</a></p>
 <p><a href="https://docs.microsoft.com/en-us/sql/relational-databases/errors-events/mssqlserver-18456-database-engine-error?view=sql-server-ver15" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/sql/relational-databases/errors-events/mssqlserver-18456-database-engine-error?view=sql-server-ver15</a></p>
 
       
