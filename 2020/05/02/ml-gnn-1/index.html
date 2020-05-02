@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）">
+<meta name="keywords" content="GNN,数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图神经网络学习笔记（1）--导论和数学基础">
+<meta property="og:url" content="http://yoursite.com/2020/05/02/ml-gnn-1/index.html">
+<meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-02T07:14:31.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图神经网络学习笔记（1）--导论和数学基础">
+<meta name="twitter:description" content="图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/05/02/ml-gnn-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>图神经网络学习笔记（1）--导论和数学基础 | 孔令仁的个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">孔令仁的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/02/ml-gnn-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="孔令仁">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="孔令仁的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图神经网络学习笔记（1）--导论和数学基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-02 13:53:19 / 修改时间：15:14:31" itemprop="dateCreated datePublished" datetime="2020-05-02T13:53:19+08:00">2020-05-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/机器学习/GNN/" itemprop="url" rel="index"><span itemprop="name">GNN</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）</p>
+<a id="more"></a>
+
+<h1 id="Introduction导论"><a href="#Introduction导论" class="headerlink" title="Introduction导论"></a>Introduction导论</h1><p>图是一种非欧几里得结构数据（经典的非欧几里得结构是图和流形）</p>
+<p>在机器学习中，有时候会用到对于图的机器学习，这种情况下需要特殊的方法。</p>
+<p>GNN产生的一个激励来源是CNN（卷积神经网络），卷积神经网络的特点是处理邻接、等权重、多层数据，而图的问题也是关注邻接，简化计算可以等权重假设，有多层关系。然而CNN处理的是欧几里得结构的数据（比如2维的图片或者1维的文本），所以需要进行泛化。</p>
+<p>另一个对于GNN的激励来自于Network Embedding，传统的方式是手动的特征工程，而后来产生了更多的方法，但是都有两个缺点：参数太多，不能泛化。</p>
+<h1 id="Basics-of-Math-and-Graph"><a href="#Basics-of-Math-and-Graph" class="headerlink" title="Basics of Math and Graph"></a>Basics of Math and Graph</h1><h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>标量scalar：数值</p>
+<p>向量vector：一列有序数据（一般默认是列向量）</p>
+<p>范数norm：<br>$$<br>|\mathbf{x}|<em>{p}=\left(\sum</em>{i=1}^{n}\left|x_{i}\right|^{p}\right)^{\frac{1}{p}}<br>$$<br>其中p取1就是绝对偏差，取2是欧几里得空间的向量长<br>$$<br>|\mathbf{x}|<em>{\infty}=\max _{i}\left|x</em>{i}\right|<br>$$<br>$L_\infty$又叫做max norm</p>
+<p>矩阵的行列式determinant：<br>$$<br>\operatorname{det}(\mathbf{A})=\sum_{k_{1} k_{2}-k_{m}}(-1)^{\tau\left(k_{1} k_{2}-k_{n}\right)} a_{1 k_{1}} a_{\nu k_{2}} \cdots a_{n k_{n}}<br>$$<br>逆序数：inversionnumber  ；逆序：inverted sequence </p>
+<p>Hadamard product  另一种矩阵乘法，对应位置相乘<br>$$<br>\mathbf{C}<em>{i j}=\mathbf{A}</em>{i j} \mathbf{B}_{i j}<br>$$</p>
+<h2 id="特征值分解"><a href="#特征值分解" class="headerlink" title="特征值分解"></a>特征值分解</h2><p>特征值eigen value与特征向量eigen vector：<br>$$<br>\mathbf{A} \mathbf{v}=\lambda \mathbf{v}<br>$$</p>
+<h3 id="特征值分解-1"><a href="#特征值分解-1" class="headerlink" title="特征值分解"></a>特征值分解</h3><p>利用特征值，可以有特征值分解（又称为对角化diagonalization）;V是一个可逆矩阵，因为他是原矩阵的n个线性无关特征向量按列组成的。<br>$$<br>\mathbf{A}\left[\begin{array}{llll}<br>v_{1} &amp; v_{2} &amp; \dots &amp; v_{n}<br>\end{array}\right]=\left[\begin{array}{llll}<br>v_{1} &amp; v_{2} &amp; \dots &amp; v_{n}<br>\end{array}\right]\left[\begin{array}{cccc}<br>\lambda_{1} &amp; &amp; &amp; \<br>&amp; \lambda_{2} &amp; &amp; \<br>&amp; &amp; \ddots &amp; \<br>&amp; &amp; &amp; \lambda_{n}<br>\end{array}\right]<br>$$</p>
+<p>$$<br>\mathbf{A}=\mathbf{V} \operatorname{diag}(\mathbf{\lambda}) \mathbf{V}^{-1}<br>$$</p>
+<p>不是所有矩阵都可以对角化，但是实对称矩阵是都可以的。</p>
+<h3 id="SVD奇异值分解"><a href="#SVD奇异值分解" class="headerlink" title="SVD奇异值分解"></a>SVD奇异值分解</h3><p>对角化不是对全部矩阵成立的，因此可以有更弱但是更加泛化的操作。</p>
+<p>给定矩阵$\mathbf A$,如果$\mathbf {A^TA}$的rank（秩）是r，那么有：<br>$$<br>\mathbf{A}=U \Sigma V^{T}<br>$$<br>其中的UV都是正交阵，实际上U的每一列都是$\mathbf {AA^T}$的特征向量，V的每一列都是$\mathbf {A^TA}$的特征向量。</p>
+<p>中间的是一个不一定是方阵的矩阵，对角元是特征值（如果有）的平方根<br>$$<br>\Sigma_{i j}=\left{\begin{array}{ll}<br>\sigma_{i} &amp; \text { if } i=j \leq r \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
+<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><h3 id="图的代数表示"><a href="#图的代数表示" class="headerlink" title="图的代数表示"></a>图的代数表示</h3><p>Adjacency matrix邻接矩阵: 对于简单图$G=(V, E)$ （有$n$顶点）可以使用邻接矩阵$A \in \mathbb{R}^{n \times n}$,描述<br>$$<br>A_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$<br>无向图的邻接矩阵是对称的<br>Degree matrix度矩阵:对于图（可以不是简单图）$G=(V, E)$ （有$n$顶点）度矩阵是一个对角阵$D \in \mathbb{R}^{n \times n}$<br>$$<br>D_{ii}=d\left(v_{i}\right)<br>$$<br>Laplacian matrix拉普拉斯矩阵: 对于<strong>简单</strong>图$G=(V, E)$ （有$n$顶点），如果认为所有边都是<strong>无向</strong>的，则有拉普拉斯矩阵$L \in \mathbb{R}^{n \times n}$<br>$$<br>L=D-A<br>$$<br>元素如下：<br>$$<br>L_{i j}=\left{\begin{array}{ll}<br>d\left(v_{i}\right) &amp; \text { if } i=j \<br>-1 &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwice. }<br>\end{array}\right.<br>$$<br>由于是简单图，所以邻接矩阵没有对角元素。</p>
+<p>由于是无向图，所以有边的位置是-1</p>
+<p>性质：</p>
+<ul>
+<li>对称、半正定</li>
+<li>特征值中0出现的次数就是图连通分支个数</li>
+<li>最小特征值为0（因为每一行的和都是0）</li>
+<li>最小非零特征值是图的代数连通度</li>
+</ul>
+<p>Symmetric normalized Laplacian正则化之后的拉普拉斯矩阵:<br>$$<br>\begin{aligned}<br>L^{sym} &amp;=D^{-1/2} L D^{-1/2} \<br>&amp;=I-D^{-\frac{1}{2}} A D^{-\frac{1}{2}}<br>\end{aligned}<br>$$<br>元素如下<br>$$<br>L_{i j}^{sym}=\left{\begin{array}{ll}<br>1 &amp; \text { if } i=j \text { and } d\left(v_{i}\right) \neq 0 \<br>-\frac{1}{\sqrt{d\left(v_{i}\right) d\left(v_{j}\right)}} &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwise. }<br>\end{array}\right.<br>$$<br>Random walk normalized Laplacian:<br>$$<br>L^{r w}=D^{-1} L=I-D^{-1} A<br>$$<br>元素如下<br>$$<br>L_{i j}^{rw}=\left{\begin{array}{ll}<br>1 &amp; \text { if } i=j \text { and } d\left(v_{i}\right) \neq 0 \<br>-\frac{1}{d\left(r_{i}\right)} &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$<br>Incidence matrix 关联矩阵：</p>
+<p>设图G有n个顶点m条边，则矩阵是$\mathbb R^{m\times n}$的</p>
+<p>对于有向图：<br>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{i}, v_{k}\right} \<br>-1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{k}, v_{i}\right} \<br>0 &amp; \text { otherwise. }<br>\end{array}\right.<br>$$<br>对于无向图：<br>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{i}, v_{k}\right} \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/GNN/" rel="tag"># GNN</a>
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/02/math-stat-1/" rel="next" title="数理统计重点总结（1）">
+                <i class="fa fa-chevron-left"></i> 数理统计重点总结（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">孔令仁</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction导论"><span class="nav-number">1.</span> <span class="nav-text">Introduction导论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basics-of-Math-and-Graph"><span class="nav-number">2.</span> <span class="nav-text">Basics of Math and Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性代数"><span class="nav-number">2.1.</span> <span class="nav-text">线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特征值分解"><span class="nav-number">2.2.</span> <span class="nav-text">特征值分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征值分解-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">特征值分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVD奇异值分解"><span class="nav-number">2.2.2.</span> <span class="nav-text">SVD奇异值分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图论"><span class="nav-number">2.3.</span> <span class="nav-text">图论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图的代数表示"><span class="nav-number">2.3.1.</span> <span class="nav-text">图的代数表示</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孔令仁</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
