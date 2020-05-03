@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="孔令仁的个人博客">
 <meta property="og:description" content="图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-02T07:31:56.596Z">
+<meta property="og:updated_time" content="2020-05-03T14:49:24.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图神经网络学习笔记（1）--导论和数学基础">
 <meta name="twitter:description" content="图神经网络学习笔记（参考书是Introduction to Graph Neuron Networks）">
@@ -365,12 +365,24 @@
                 
               
 
-              <time title="创建时间：2020-05-02 13:53:19 / 修改时间：15:31:56" itemprop="dateCreated datePublished" datetime="2020-05-02T13:53:19+08:00">2020-05-02</time>
+              <time title="创建时间：2020-05-02 13:53:19" itemprop="dateCreated datePublished" datetime="2020-05-02T13:53:19+08:00">2020-05-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-03 22:49:24" itemprop="dateModified" datetime="2020-05-03T22:49:24+08:00">2020-05-03</time>
               
             
           </span>
@@ -472,7 +484,7 @@
 <p>Laplacian matrix拉普拉斯矩阵: 对于<strong>简单</strong>图$G=(V, E)$ （有$n$顶点），如果认为所有边都是<strong>无向</strong>的，则有拉普拉斯矩阵$L \in \mathbb{R}^{n \times n}$ </p>
 <p>$$<br>L=D-A<br>$$</p>
 <p>元素如下：</p>
-<p>$$<br>L_{i j}=\left{\begin{array}{ll}<br>d\left(v_{i}\right) &amp; \text { if } i=j \<br>-1 &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwice }<br>\end{array}\right<br>$$</p>
+<p>$$<br>L_{i j}=\left{\begin{array}{ll}<br>d\left(v_{i}\right) &amp; \text { if } i=j \<br>-1 &amp; \text { if }\left{v_{i}, v_{j}\right} \in E \text { and } i \neq j \<br>0 &amp; \text { otherwice }<br>\end{array}\right.<br>$$</p>
 <p>由于是简单图，所以邻接矩阵没有对角元素。</p>
 <p>由于是无向图，所以有边的位置是-1</p>
 <p>性质：</p>
@@ -493,9 +505,9 @@
 <p>Incidence matrix 关联矩阵：</p>
 <p>设图G有n个顶点m条边，则矩阵是$\mathbb R^{m\times n}$的</p>
 <p>对于有向图：</p>
-<p>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{i}, v_{k}\right} \<br>-1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{k}, v_{i}\right} \<br>0 &amp; \text { otherwise. }<br>\end{array}\right.<br>$$</p>
+<p>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t. } e_{j}=\left{v_{i}, v_{k}\right} \<br>-1 &amp; \text { if } \exists k \text { s.t. } e_{j}=\left{v_{k}, v_{i}\right} \<br>0 &amp; \text { otherwise. }<br>\end{array}\right.<br>$$</p>
 <p>对于无向图：</p>
-<p>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t } e_{j}=\left{v_{i}, v_{k}\right} \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
+<p>$$<br>M_{i j}=\left{\begin{array}{ll}<br>1 &amp; \text { if } \exists k \text { s.t. } e_{j}=\left{v_{i}, v_{k}\right} \<br>0 &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
 
       
     </div>
