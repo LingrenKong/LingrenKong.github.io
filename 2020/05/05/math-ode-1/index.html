@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="孔令仁的个人博客">
 <meta property="og:description" content="整理一下第四章n阶线性微分方程的各种流程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-05T14:19:21.609Z">
+<meta property="og:updated_time" content="2020-05-05T14:31:48.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常微分（1）王高雄第四章知识总结">
 <meta name="twitter:description" content="整理一下第四章n阶线性微分方程的各种流程">
@@ -365,7 +365,7 @@
                 
               
 
-              <time title="创建时间：2020-05-05 21:55:23 / 修改时间：22:19:21" itemprop="dateCreated datePublished" datetime="2020-05-05T21:55:23+08:00">2020-05-05</time>
+              <time title="创建时间：2020-05-05 21:55:23 / 修改时间：22:31:48" itemprop="dateCreated datePublished" datetime="2020-05-05T21:55:23+08:00">2020-05-05</time>
             
 
             
@@ -439,7 +439,7 @@
         <p>整理一下第四章n阶线性微分方程的各种流程</p>
 <a id="more"></a>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">	A[n阶线性微分方程]</span><br><span class="line">	I1&#123;是否齐次&#125;</span><br><span class="line">	B1[齐次]</span><br><span class="line">	B2[非齐次]</span><br><span class="line">	I2&#123;是否常系数&#125;</span><br><span class="line">	C1[常系数]</span><br><span class="line">	C2[变系数]</span><br><span class="line">	D[先求齐次]</span><br><span class="line">	E[特征方程]</span><br><span class="line">	I3&#123;是否有已知解&#125;</span><br><span class="line">	H1[没有特解,要找出一个特解]</span><br><span class="line">	H2[已知特解求通解]</span><br><span class="line">	F[幂级数法]</span><br><span class="line">	G[可降阶方程]</span><br><span class="line">	A--&gt;I1</span><br><span class="line">	I1--&gt;B1</span><br><span class="line">	I1--&gt;B2--&gt;D--&gt;I2</span><br><span class="line">	B1--&gt;I2</span><br><span class="line">	I2--&gt;C1--&gt;E</span><br><span class="line">	I2--&gt;C2--&gt;I3</span><br><span class="line">	I3--&gt;H1--&gt;F</span><br><span class="line">	I3--&gt;H2--&gt;G</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">	A[n阶线性微分方程]</span><br><span class="line">	I1&#123;是否齐次&#125;</span><br><span class="line">	B1[齐次]</span><br><span class="line">	B2[非齐次]</span><br><span class="line">	I2&#123;是否常系数&#125;</span><br><span class="line">	C1[常系数]</span><br><span class="line">	C2[变系数]</span><br><span class="line">	D[先求齐次]</span><br><span class="line">	E[特征方程]</span><br><span class="line">	I3&#123;是否有已知解&#125;</span><br><span class="line">	H1[没有特解,要找出一个特解]</span><br><span class="line">	H2[已知特解求通解]</span><br><span class="line">	F[幂级数法]</span><br><span class="line">	G1[可降阶-不含x的低阶导数]</span><br><span class="line">	G2[可降阶-不含t]</span><br><span class="line">	G3[可降阶-利用非零特解降阶]</span><br><span class="line">	A--&gt;I1</span><br><span class="line">	I1--&gt;B1</span><br><span class="line">	I1--&gt;B2--&gt;D--&gt;I2</span><br><span class="line">	B1--&gt;I2</span><br><span class="line">	I2--&gt;C1--求解问题--&gt;E</span><br><span class="line">	I2--&gt;C2--求解问题--&gt;I3</span><br><span class="line">	C2--方程降阶--&gt;G[三种降阶方法]</span><br><span class="line">	G--&gt;G1</span><br><span class="line">	G--&gt;G2</span><br><span class="line">	G--&gt;G3</span><br><span class="line">    I3--&gt;H1--&gt;F</span><br><span class="line">	I3--&gt;H2--&gt;G3</span><br></pre></td></tr></table></figure>
 
 
       
