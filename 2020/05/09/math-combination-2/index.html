@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="常系数递推关系">
+<meta name="keywords" content="组合数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组合数学知识（2）--常系数递推关系">
+<meta property="og:url" content="http://yoursite.com/2020/05/09/math-combination-2/index.html">
+<meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="常系数递推关系">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-09T10:07:55.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="组合数学知识（2）--常系数递推关系">
+<meta name="twitter:description" content="常系数递推关系">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/05/09/math-combination-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>组合数学知识（2）--常系数递推关系 | 孔令仁的个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">孔令仁的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/math-combination-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="孔令仁">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="孔令仁的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">组合数学知识（2）--常系数递推关系
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-09 08:34:46 / 修改时间：18:07:55" itemprop="dateCreated datePublished" datetime="2020-05-09T08:34:46+08:00">2020-05-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/数学/" itemprop="url" rel="index"><span itemprop="name">数学</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/数学/组合数学/" itemprop="url" rel="index"><span itemprop="name">组合数学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>常系数递推关系</p>
+<a id="more"></a>
+
+<p>常系数递推关系：</p>
+<ul>
+<li>常系数齐次线性递推<ul>
+<li>互不相同的实特征根</li>
+<li>存在相同的实特征根</li>
+<li>有复数根（以仅有两个讨论）</li>
+</ul>
+</li>
+<li>常系数非齐次线性递推</li>
+</ul>
+<h1 id="齐次递推关系"><a href="#齐次递推关系" class="headerlink" title="齐次递推关系"></a>齐次递推关系</h1><p>$$<br>H_{n}-a_{1} H_{n-1}-a_{2} H_{n-2}-\cdots-a_{r} H_{n-r}=0<br>$$</p>
+<p>其中最后的$a_r \neq 0$，这就是r阶的齐次递推关系。（系数为负是因为通常递推式是左侧给出$H_n$其余在右端）</p>
+<p>对于这样的递推关系，有相应的特征方程：<br>$$<br>x^{r}-a_{1} x^{r-1}-a_{2} x^{r-2}-\dots-a_{r-1} x-a_{r}=0<br>$$<br>特征方程的根称为<strong>原递推关系的特征根</strong></p>
+<p>【整数的递推关系，可以有共轭无理数特征根，比如斐波那契数列】</p>
+<p><strong>齐次的计算难度在于高阶多项式的求根方法。</strong></p>
+<h2 id="互不相同特征根"><a href="#互不相同特征根" class="headerlink" title="互不相同特征根"></a>互不相同特征根</h2><p>如果有互不相同的r个特征根$\boldsymbol{q}_{1}, \boldsymbol{q}_{2}, \dots, \boldsymbol{q}_{r}$<br>$$<br>\boldsymbol{H}_{n}=c_{1} \boldsymbol{q}_{1}^{n}+c_{2} \boldsymbol{q}_{2}^{n}+\cdots+\boldsymbol{c}_{r} \boldsymbol{q}_{r}^{n}<br>$$<br>其中的待定系数可以用带入求出</p>
+<h2 id="有实重根情况"><a href="#有实重根情况" class="headerlink" title="有实重根情况"></a>有实重根情况</h2><p>如果有t个特征根$\boldsymbol{q}_{1}, \boldsymbol{q}_{2}, \dots, \boldsymbol{q}_{t}$，每个根的重数为$r_i$</p>
+<p>那么通式为：<br>$$<br>H_n = \sum_{i=1}^t (c_{i1} +c_{i2} n+\cdots+c_{ir_{i}} n^{r_{i}-1} )q_{i}^{n}<br>$$<br>同样可以用初值条件解出待定系数</p>
+<h2 id="复数根（以一对为例）"><a href="#复数根（以一对为例）" class="headerlink" title="复数根（以一对为例）"></a>复数根（以一对为例）</h2><p>实系数方程复数根成对<br>$$<br>\begin{array}{l}<br>\alpha_{1}=\delta+i \omega=\rho e^{i \theta}=\rho(\cos \theta+i \sin \theta) \<br>\alpha_{2}=\delta-i \omega=\rho e^{-i \theta}=\rho(\cos \theta-i \sin \theta)<br>\end{array}<br>$$<br>套用上面的待定系数（那么这里的系数是复数），进行调整，得到实数的两个待定系数AB：<br>$$<br>\begin{array}{l}<br>l_{1} \alpha_{1}^{n}+l_{2} \alpha_{2}^{n} \<br>=l_{1} \rho^{n}(\cos n \theta+i \sin n \theta)+l_{2} \rho^{n}(\cos n \theta-i \sin n \theta) \<br>=\left(l_{1}+l_{2}\right) \rho^{n} \cos n \theta+i\left(l_{1}-l_{2}\right) \rho^{n} \sin n \theta \<br>= A \rho^{n} \cos n \theta+B \rho^{n} \sin n \theta<br>\end{array}<br>$$<br>通过这个方法可以避免复数的出现，简化待定系数法求解的难度</p>
+<h1 id="非齐次"><a href="#非齐次" class="headerlink" title="非齐次"></a>非齐次</h1><p>$$<br>H_{n}-a_{1} H_{n-1}-a_{2} H_{n-2}-\cdots-a_{r} H_{n-r}=f(n)<br>$$</p>
+<p>一般的非齐次问题不容易求解，仅对特殊情况有好的方法</p>
+<h2 id="观察特解法"><a href="#观察特解法" class="headerlink" title="观察特解法"></a>观察特解法</h2><p>类似于线性代数的齐次方程与非齐次方程的关系，递推关系也有这个特点</p>
+<p>可以通过观察法找到一个特解，与对应齐次的递推关系相加。</p>
+<p>【一般不容易观察到】</p>
+<h2 id="升阶法"><a href="#升阶法" class="headerlink" title="升阶法"></a>升阶法</h2><p><strong>非齐次项是多项式</strong>的情况下，可以增加递推关系的阶，降低非齐次项的幂次, 从而化成齐次求解</p>
+<p>【例】汉诺塔</p>
+<p>$a_n = 2a_{n-1}+1$与$a_{n-1}=2 a_{n-2}+1$相减，那么就可以得到$a_{n}-3 a_{n-1}+2 a_{n-2}=0$</p>
+<h2 id="1阶多项式非齐次的特色情况"><a href="#1阶多项式非齐次的特色情况" class="headerlink" title="1阶多项式非齐次的特色情况"></a>1阶多项式非齐次的特色情况</h2><p>$$<br>\boldsymbol{H}_{n+1}+\boldsymbol{a} \boldsymbol{H}_{n}=\boldsymbol{f}(\boldsymbol{n})<br>$$</p>
+<p>如果对于一阶非齐次，$f(n)$为m次的多项式，那么：</p>
+<ul>
+<li>如果a是-1，有一个m+1次的多项式特解</li>
+<li>其他情况，有一个m次多项式特解</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>这个一般很少用</li>
+<li>特解是设定待定系数，然后套方程求解</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/组合数学/" rel="tag"># 组合数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/08/math-ml-1/" rel="next" title="机器学习的数学知识（1）--信息熵">
+                <i class="fa fa-chevron-left"></i> 机器学习的数学知识（1）--信息熵
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">孔令仁</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#齐次递推关系"><span class="nav-number">1.</span> <span class="nav-text">齐次递推关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#互不相同特征根"><span class="nav-number">1.1.</span> <span class="nav-text">互不相同特征根</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有实重根情况"><span class="nav-number">1.2.</span> <span class="nav-text">有实重根情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复数根（以一对为例）"><span class="nav-number">1.3.</span> <span class="nav-text">复数根（以一对为例）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非齐次"><span class="nav-number">2.</span> <span class="nav-text">非齐次</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#观察特解法"><span class="nav-number">2.1.</span> <span class="nav-text">观察特解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升阶法"><span class="nav-number">2.2.</span> <span class="nav-text">升阶法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1阶多项式非齐次的特色情况"><span class="nav-number">2.3.</span> <span class="nav-text">1阶多项式非齐次的特色情况</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">孔令仁</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
