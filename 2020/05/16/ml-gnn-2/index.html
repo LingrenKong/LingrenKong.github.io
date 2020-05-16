@@ -94,17 +94,18 @@
 
 
 
-  <meta name="description" content="使用pycharm来学python的记录">
+  <meta name="description" content="第四章Vanilla Graph Neural Networks">
+<meta name="keywords" content="数学,GNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pycharm入门笔记-1">
-<meta property="og:url" content="http://yoursite.com/2020/02/26/pycharm-note-1/index.html">
+<meta property="og:title" content="图神经网络学习笔记（2）--第四章Vanilla Graph Neural Networks">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/ml-gnn-2/index.html">
 <meta property="og:site_name" content="孔令仁的个人博客">
-<meta property="og:description" content="使用pycharm来学python的记录">
+<meta property="og:description" content="第四章Vanilla Graph Neural Networks">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-26T07:03:12.717Z">
+<meta property="og:updated_time" content="2020-05-16T08:00:14.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pycharm入门笔记-1">
-<meta name="twitter:description" content="使用pycharm来学python的记录">
+<meta name="twitter:title" content="图神经网络学习笔记（2）--第四章Vanilla Graph Neural Networks">
+<meta name="twitter:description" content="第四章Vanilla Graph Neural Networks">
 
 
 
@@ -112,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/02/26/pycharm-note-1/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/16/ml-gnn-2/">
 
 
 
@@ -122,7 +123,7 @@
   };
 </script>
 
-  <title>pycharm入门笔记-1 | 孔令仁的个人博客</title>
+  <title>图神经网络学习笔记（2）--第四章Vanilla Graph Neural Networks | 孔令仁的个人博客</title>
   
 
 
@@ -321,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/pycharm-note-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/ml-gnn-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="孔令仁">
@@ -338,7 +339,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pycharm入门笔记-1
+          <h1 class="post-title" itemprop="name headline">图神经网络学习笔记（2）--第四章Vanilla Graph Neural Networks
 
               
             
@@ -364,7 +365,7 @@
                 
               
 
-              <time title="创建时间：2020-02-26 14:30:21 / 修改时间：15:03:12" itemprop="dateCreated datePublished" datetime="2020-02-26T14:30:21+08:00">2020-02-26</time>
+              <time title="创建时间：2020-05-16 15:17:34 / 修改时间：16:00:14" itemprop="dateCreated datePublished" datetime="2020-05-16T15:17:34+08:00">2020-05-16</time>
             
 
             
@@ -374,6 +375,38 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/机器学习/GNN/" itemprop="url" rel="index"><span itemprop="name">GNN</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -403,25 +436,36 @@
       
 
       
-        <p>使用pycharm来学python的记录</p>
+        <p>第四章Vanilla Graph Neural Networks</p>
 <a id="more"></a>
 
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/</a></p>
-<p>pycharm是jetbrains的产品，有社区版和专业版（还有一个学生版，但是要认证之类的，我没有研究过）</p>
-<p>下载之后点击安装即可，安装过程中基本需要的操作大概有这么几项：</p>
+<h1 id="Introduction引入"><a href="#Introduction引入" class="headerlink" title="Introduction引入"></a>Introduction引入</h1><p>vanilla是“香草”的意思，这里似乎是个魔改术语，好像指的是最初的/没有扩展的版本。</p>
+<p>GNN的目的在于找到一种embedding–$h_v \in \mathbb{R}^s$，来编码每个顶点所邻接的数据性质，而后就可以基于$h_v$来得到一些输出$o_v$比如预测顶点的分类</p>
+<p>最基本的情况下，每个顶点有自己的特征（feature），边可能有信息也可能没有，图是同质的无向图（undirected homogeneous graph ）</p>
+<p>每个顶点的边集合和邻接点集合记为$co[v],ne[v]$</p>
+<h1 id="Model模型"><a href="#Model模型" class="headerlink" title="Model模型"></a>Model模型</h1><h2 id="概念与理论"><a href="#概念与理论" class="headerlink" title="概念与理论"></a>概念与理论</h2><p>模型有一个参数方程（parametric function）$f$叫做<strong>local</strong> transition function看，对所有顶点应用，还有一个方程$g$用来得到输出，叫做<strong>local</strong> output function。</p>
+<p>公式：<br>$$<br>\begin{array}{c}<br>\mathbf{h}_{v}=f\left(\mathbf{x}_{v}, \mathbf{x}_{c o[v]}, \mathbf{h}_{n e[v]}, \mathbf{x}_{n e[v]}\right) \<br>\mathbf{o}_{v}=g\left(\mathbf{h}_{v}, \mathbf{x}_{v}\right)<br>\end{array}<br>$$<br>之所以是参数方程，是因为右侧有隐藏的信息（$h$），x是显式的输入特征，但是h不是。</p>
+<p>累加得到相应的全局：<br>$$<br>\begin{array}{l}<br>\mathbf{H}=F(\mathbf{H}, \mathbf{X}) \<br>\mathbf{O}=G\left(\mathbf{H}, \mathbf{X}_{N}\right)<br>\end{array}<br>$$<br>$H$是所有的state（隐藏状态），$O$是所有的输出，$X$是所有输入顶点特征，$X_N$是所有邻点的特征。</p>
+<p>基于$F$是一个<strong>压缩映射</strong>（contraction map ）的假设下，H的解作为方程的不动点（fixed point ），是唯一的。【<strong>完备度量空间上的压缩映射具有唯一的不动点</strong>】</p>
+<p>于是有相应的迭代求解法：<br>$$<br>\mathbf{H}^{t+1}=F\left(\mathbf{H}^{t}, \mathbf{X}\right)<br>$$</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>确定了式子之后，下一步是确定如何去学习$f,g$的参数</p>
+<p>在有监督学习（可以半监督）情况下，定义预测目标target为$t_i$，可以定义损失函数：<br>$$<br>\text { loss }=\sum_{i=1}^{p}\left(\mathbf{t}_{i}-\mathbf{o}_{i}\right)<br>$$<br>其中p是有标记的顶点个数（所以可以是半监督学习）</p>
+<p>对于参数，采用梯度下降的方法来更新【下面是一次参数更新】：</p>
+<ul>
+<li>运行迭代$T$，使得方程近似达到不动点</li>
+<li>计算参数$W$的各个梯度</li>
+<li>按照最后一次的梯度更新$W$</li>
+</ul>
+<h1 id="Limitations局限"><a href="#Limitations局限" class="headerlink" title="Limitations局限"></a>Limitations局限</h1><p>有4个局限性：</p>
 <ol>
-<li>之后是选择安装的路径位置，这个可以看自己的磁盘空间，不要求在C</li>
-<li>再之后是一系列配置：<ol>
-<li>32VS64，按自己电脑是32位还是64位选</li>
-<li>pycharm加入系统路径–Windows有快捷图标不需要这个</li>
-<li>Update context menu：修改鼠标右键的效果–可以右键把文件夹作为项目打开（比如开别人的GitHub代码下载）</li>
-<li>将所有 py 文件关联到 pycharm：我没有选，因为如果只是看文件可以用VScode，而且pycharm都是项目式打开</li>
+<li>计算不便，每次要$T$个迭代才能找到近似不动点</li>
+<li>每一波T层迭代的参数是一样的，而一般的神经网络都是多层有不同参数</li>
+<li>忽略了边的信息</li>
+<li>T如果比较大，不动点情况下顶点的值会比较平滑，不具有区分度，而我们所需要的是顶点的表征而不是图的整体表征</li>
 </ol>
-</li>
-<li>接下来是用户配置，作为新手没有要导入的用户配置，所以要自己选一下（可以修改），我就选择了暗色和markdown插件</li>
-</ol>
-<p>这样就完成安装了，接下来只要英语水平过关，就可以用help和<a href="https://www.jetbrains.com/help/pycharm/quick-start-guide.html?keymap=primary_default_for_windows" target="_blank" rel="noopener">官网文档</a>来完成基本入门了</p>
-<p>P.S. Tip of the day是个不错的功能，虽然开程序看起来好像有个干扰，但是每次学习一个小技巧还是很好的。</p>
+<p>Gated Graph Neural Network (GGNN)  可以解决第一个问题</p>
+<p>Relational GCN (R-GCN)  可以解决有向图的处理</p>
+<p>总之这个是最简单的GNN模型</p>
 
       
     </div>
@@ -443,6 +487,17 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+            <a href="/tags/GNN/" rel="tag"># GNN</a>
+          
+        </div>
+      
 
       
       
@@ -452,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/31/19-to-20/" rel="next" title="19到20跨年总结&flag">
-                <i class="fa fa-chevron-left"></i> 19到20跨年总结&flag
+              <a href="/2020/05/16/python-seaborn-2/" rel="next" title="seaborn学习笔记（2）--加载数据">
+                <i class="fa fa-chevron-left"></i> seaborn学习笔记（2）--加载数据
               </a>
             
           </div>
@@ -461,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/26/pycharm-note-2/" rel="prev" title="pycharm入门笔记-2">
-                pycharm入门笔记-2 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -703,7 +754,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction引入"><span class="nav-number">1.</span> <span class="nav-text">Introduction引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model模型"><span class="nav-number">2.</span> <span class="nav-text">Model模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念与理论"><span class="nav-number">2.1.</span> <span class="nav-text">概念与理论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">2.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Limitations局限"><span class="nav-number">3.</span> <span class="nav-text">Limitations局限</span></a></li></ol></div>
             
 
           </div>
@@ -877,6 +928,46 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
