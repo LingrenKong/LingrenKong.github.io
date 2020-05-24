@@ -102,10 +102,30 @@
 <meta property="og:site_name" content="孔令仁的个人博客">
 <meta property="og:description" content="Distribution图的文档翻译与学习 https://seaborn.pydata.org/tutorial/distributions.html">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-16T05:18:16.348Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_5_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_7_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_9_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_12_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_14_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_15_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_17_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_19_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_21_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_23_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_27_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_29_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_31_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_33_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_35_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_37_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_39_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_41_0.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_43_0.png">
+<meta property="og:updated_time" content="2020-05-24T01:09:00.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="seaborn学习笔记（1）--Distribution图">
 <meta name="twitter:description" content="Distribution图的文档翻译与学习 https://seaborn.pydata.org/tutorial/distributions.html">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/08/python-seaborn-1/output_5_0.png">
 
 
 
@@ -382,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-16 13:18:16" itemprop="dateModified" datetime="2020-05-16T13:18:16+08:00">2020-05-16</time>
+                <time title="修改时间：2020-05-24 09:09:00" itemprop="dateModified" datetime="2020-05-24T09:09:00+08:00">2020-05-24</time>
               
             
           </span>
@@ -452,7 +472,194 @@
 <p><a href="https://seaborn.pydata.org/tutorial/distributions.html" target="_blank" rel="noopener">https://seaborn.pydata.org/tutorial/distributions.html</a></p>
 <a id="more"></a>
 
+<h1 id="Visualizing-the-distribution-of-a-dataset-数据集分布的可视化"><a href="#Visualizing-the-distribution-of-a-dataset-数据集分布的可视化" class="headerlink" title="Visualizing the distribution of a dataset 数据集分布的可视化"></a>Visualizing the distribution of a dataset 数据集分布的可视化</h1><p>When dealing with a set of data, often the first thing you’ll want to do is get a sense for how the variables are distributed. This chapter of the tutorial will give a brief introduction to some of the tools in seaborn for examining univariate and bivariate distributions. You may also want to look at the categorical plots chapter for examples of functions that make it easy to compare the distribution of a variable across levels of other variables.</p>
+<p>在处理一组数据时，通常首先要做的是了解变量是如何分布的。本章将简要介绍seaborn中用于检查单变量和双变量分布的一些工具。您可能还想查看分类图一章中的函数示例，这些函数使比较变量在其他变量级别上的分布变得很容易。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.set(color_codes=<span class="literal">True</span>)</span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>导入的包有</p>
+<ul>
+<li>numpy–矩阵向量运算</li>
+<li>pandas–dataframe操作</li>
+<li>seaborn</li>
+<li>plt–是seaborn的基础，sns实际上是对plt的封装</li>
+<li>stats–提供统计函数</li>
+</ul>
+<p>sns.set可以设定出seaborn的配置（此处控制了配色）</p>
+<p>设定随机数有助于数据的稳定性，这样画出来的图是一样的</p>
+<h2 id="Plotting-univariate-distributions-单变量分布图"><a href="#Plotting-univariate-distributions-单变量分布图" class="headerlink" title="Plotting univariate distributions 单变量分布图"></a>Plotting univariate distributions 单变量分布图</h2><p>The most convenient way to take a quick look at a univariate distribution in seaborn is the distplot() function. By default, this will draw a histogram and fit a kernel density estimate (KDE).</p>
+<p>要快速查看seaborn中的单变量分布，最方便的方法是使用distplot()函数。默认情况下，这将绘制一个直方图并<strong>拟合核密度估计(KDE)</strong>。</p>
+<p>P.S. seaborn在这方面最大的优势就是提供一个默认的核密度估计，虽然画图速度变慢，但是特别棒。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.random.normal(size=<span class="number">100</span>)</span><br><span class="line">sns.distplot(x);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_5_0.png">
+
+
+<h3 id="Histograms直方图"><a href="#Histograms直方图" class="headerlink" title="Histograms直方图"></a>Histograms直方图</h3><p>Histograms are likely familiar, and a hist function already exists in matplotlib. A histogram represents the distribution of data by forming bins along the range of the data and then drawing bars to show the number of observations that fall in each bin.</p>
+<p>To illustrate this, let’s remove the density curve and add a rug plot, which draws a small vertical tick at each observation. You can make the rug plot itself with the rugplot() function, but it is also available in distplot():</p>
+<p>直方图我们可能很熟悉，而且在matplotlib中已经存在一个hist函数。直方图表示数据的分布，它沿着数据的范围形成箱子，然后绘制条带<em>（与条形图不同）</em> 来显示每个箱子中的观测数据的数量。</p>
+<p>为了说明这一点，我们删除密度曲线并添加一个rug plot，<strong>它在每个观察值上画一个小的垂直刻度</strong>。你可以用rugplot()函数创建rugplot，但也可以在distplot()中使用；</p>
+<p>rug给出的小竖线对应的是每个数据点，可以减少直方图对数据分组产生的信息损失</p>
+<p>P.S.实际上displot相当于是集大成了，可以用选项来控制使用不同的子方法，这也是sns简便之处</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(x, kde=<span class="literal">False</span>, rug=<span class="literal">True</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_7_0.png">
+
+
+<p>When drawing histograms, the main choice you have is the number of bins to use and where to place them. distplot() uses a simple rule to make a good guess for what the right number is by default, but trying more or fewer bins might reveal other features in the data:</p>
+<p>在绘制直方图时，您的主要选择是<strong>要使用的箱子的数量和放置它们的位置</strong>。distplot()使用一个简单的规则来猜测默认情况下正确的数字是多少，但是尝试使用更多或更少的箱子可能会揭示数据中的其他特性:</p>
+<p>P.S.有一个控制格子数的参数bins非常合理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(x, bins=<span class="number">20</span>, kde=<span class="literal">False</span>, rug=<span class="literal">True</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_9_0.png">
+
+
+<h3 id="Kernel-density-estimation核密度估计"><a href="#Kernel-density-estimation核密度估计" class="headerlink" title="Kernel density estimation核密度估计"></a>Kernel density estimation核密度估计</h3><p>The kernel density estimate may be less familiar, but it can be a useful tool for plotting the shape of a distribution. Like the histogram, the KDE plots encode the density of observations on one axis with height along the other axis:</p>
+<p>核密度估计对我们可能不太熟悉，但它可以作为绘制分布形状的有用工具。与柱状图一样，KDE图在一个轴上编码观察的密度，在另一个轴上编码高度:</p>
+<p><code>seaborn.kdeplot(data, data2=None, shade=False, vertical=False, kernel=&#39;gau&#39;, bw=&#39;scott&#39;, gridsize=100, cut=3, clip=None, legend=True, cumulative=False, shade_lowest=True, cbar=False, cbar_ax=None, cbar_kws=None, ax=None, **kwargs)</code></p>
+<p>函数如上面所说：</p>
+<ul>
+<li>data是数据输入（一维度数组）</li>
+<li>如果有data2就是二维的核密度估计了</li>
+<li>shade–是否在函数下面加阴影</li>
+<li>vertical</li>
+<li>有多种kernel可选：{‘gau’ | ‘cos’ | ‘biw’ | ‘epa’ | ‘tri’ | ‘triw’ },其中二维只能用高斯核函数</li>
+<li>bw是bandwidth的缩写，有两种自动估计方法，也可以输入标量自己定（或者二维一对标量）{‘scott’ | ‘silverman’ | scalar | pair of scalars }</li>
+<li>gridsize控制格点密度（如果格点太多计算就复杂了）</li>
+<li>cut处理极值</li>
+<li>clip限定用于绘图的数据点个数</li>
+<li>legend图例</li>
+<li>cumulative：给出kde函数的累计密度$F(x)$</li>
+<li>shade_lowest二维用到的参数</li>
+<li>cbar：给二维一个颜色条（因为二维kde的密度用颜色表示）<ul>
+<li>cbar_ax：颜色条画在哪里</li>
+<li>cbar_kws：颜色条参数</li>
+</ul>
+</li>
+<li>ax：画在哪个轴上（ax是plt的概念）</li>
+<li>**kwargs：就是其他参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.distplot(x, hist=<span class="literal">False</span>, rug=<span class="literal">True</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_12_0.png">
+
+
+<p>Drawing a KDE is more computationally involved than drawing a histogram. What happens is that each observation is first replaced with a normal (Gaussian) curve centered at that value:</p>
+<p>Next, these curves are summed to compute the value of the density at each point in the support grid. The resulting curve is then normalized so that the area under it is equal to 1:</p>
+<p><strong>绘制KDE比绘制直方图更涉及计算开销</strong>。发生的情况是，每个观测首先被一个以该值为中心的正常(高斯)曲线所取代</p>
+<p>然后，对这些曲线求和，计算网格中每个点的密度值。然后对得到的曲线进行归一化处理，使曲线下的面积等于1</p>
+<p>P.S.这个是对KDE的讲解，tarpz这种积分工具函数和画图关系不大</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, size=<span class="number">30</span>)</span><br><span class="line">bandwidth = <span class="number">1.06</span> * x.std() * x.size ** (<span class="number">-1</span> / <span class="number">5.</span>)</span><br><span class="line">support = np.linspace(<span class="number">-4</span>, <span class="number">4</span>, <span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">kernels = []</span><br><span class="line"><span class="keyword">for</span> x_i <span class="keyword">in</span> x:</span><br><span class="line"></span><br><span class="line">    kernel = stats.norm(x_i, bandwidth).pdf(support)</span><br><span class="line">    kernels.append(kernel)</span><br><span class="line">    plt.plot(support, kernel, color=<span class="string">"r"</span>)</span><br><span class="line"></span><br><span class="line">sns.rugplot(x, color=<span class="string">".2"</span>, linewidth=<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_14_0.png">
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> trapz</span><br><span class="line">density = np.sum(kernels, axis=<span class="number">0</span>)</span><br><span class="line">density /= trapz(density, support)</span><br><span class="line">plt.plot(support, density);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_15_0.png">
+
+
+<p>We can see that if we use the kdeplot() function in seaborn, we get the same curve. This function is used by distplot(), but it provides a more direct interface with easier access to other options when you just want the density estimate:</p>
+<p>我们可以看到，如果在seaborn中使用kdeplot()函数，我们会得到相同的曲线。distplot()使用这个函数，但它（kde）提供了一个更直接的接口，当您只想要密度估计时，可以更容易地访问其他选项（应该是指kde这个方法的参数）:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.kdeplot(x, shade=<span class="literal">True</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_17_0.png">
+
+
+<p>The bandwidth (bw) parameter of the KDE controls how tightly the estimation is fit to the data, much like the bin size in a histogram. It corresponds to the width of the kernels we plotted above. The default behavior tries to guess a good value using a common reference rule, but it may be helpful to try larger or smaller values:</p>
+<p>KDE的bandwidth (bw)参数控制估计与数据的匹配程度，就像直方图中的bin大小一样。它对应于我们在上面绘制的内核的宽度。默认情况会使用一个公共的参考规则来猜测一个好的值，但是如果你去尝试更大或更小的值或许会更好:</p>
+<p>【理解】如果宽度太大，就看起来都是一个唯一的正态分布了（绿色），而如果宽度太小和直方图宽过小一样，会过于关注单个数据的特质，有太多的峰（橙色）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sns.kdeplot(x)</span><br><span class="line">sns.kdeplot(x, bw=<span class="number">.2</span>, label=<span class="string">"bw: 0.2"</span>)</span><br><span class="line">sns.kdeplot(x, bw=<span class="number">2</span>, label=<span class="string">"bw: 2"</span>)</span><br><span class="line">plt.legend();</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_19_0.png">
+
+
+<p>As you can see above, the nature of the Gaussian KDE process means that estimation extends past the largest and smallest values in the dataset. It’s possible to control how far past the extreme values the curve is drawn with the cut parameter; however, this only influences how the curve is drawn and not how it is fit:</p>
+<p>正如在上面所看到的，高斯KDE过程的本质意味着对数据集从最小到最大值的区间上一个估计。你可以用CUT控制kde曲线的范围，然而，这只影响如何绘制曲线，而不是如何拟合:</p>
+<p>【下例就是cut=0的时候，截取到数据的两端，没有往外画】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sns.kdeplot(x, shade=<span class="literal">True</span>, cut=<span class="number">0</span>)</span><br><span class="line">sns.rugplot(x);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_21_0.png">
+
+
+<h2 id="Fitting-parametric-distributions"><a href="#Fitting-parametric-distributions" class="headerlink" title="Fitting parametric distributions"></a>Fitting parametric distributions</h2><p>You can also use distplot() to fit a parametric distribution to a dataset and visually evaluate how closely it corresponds to the observed data:</p>
+<p>你还可以使用distplot()将参数分布拟合到数据集，并直观地评估它与观察到的数据的密切程度:</p>
+<p>下图为一个伽马分布的分布与数据直方图</p>
+<p>【这个拟合线不是kde，而是对于数据，按照给定fit为gamma分布族进行了参数估计画出来的密度】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = np.random.gamma(<span class="number">6</span>, size=<span class="number">200</span>)</span><br><span class="line">sns.distplot(x, kde=<span class="literal">False</span>, fit=stats.gamma);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_23_0.png">
+
+
+<h1 id="Plotting-bivariate-distributions-两个变量的分布画图"><a href="#Plotting-bivariate-distributions-两个变量的分布画图" class="headerlink" title="Plotting bivariate distributions 两个变量的分布画图"></a>Plotting bivariate distributions 两个变量的分布画图</h1><p>It can also be useful to visualize a bivariate distribution of two variables. The easiest way to do this in seaborn is to just use the jointplot() function, which creates a multi-panel figure that shows both the bivariate (or joint) relationship between two variables along with the univariate (or marginal) distribution of each on separate axes.</p>
+<p>将两个变量的二元分布形象化也很有用。在seaborn中，最简单的方法是使用jointplot()函数，它创建一个多面板图形，显示两个变量之间的二元(或联合)关系，以及<strong>每个变量在不同轴上的单变量(或边际)分布</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据</span></span><br><span class="line">mean, cov = [<span class="number">0</span>, <span class="number">1</span>], [(<span class="number">1</span>, <span class="number">.5</span>), (<span class="number">.5</span>, <span class="number">1</span>)]</span><br><span class="line">data = np.random.multivariate_normal(mean, cov, <span class="number">200</span>)</span><br><span class="line">df = pd.DataFrame(data, columns=[<span class="string">"x"</span>, <span class="string">"y"</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Scatterplots散点图"><a href="#Scatterplots散点图" class="headerlink" title="Scatterplots散点图"></a>Scatterplots散点图</h2><p>The most familiar way to visualize a bivariate distribution is a scatterplot, where each observation is shown with point at the x and y values. This is analogous to a rug plot on two dimensions. You can draw a scatterplot with scatterplot(), and it is also the default kind of plot shown by the jointplot() function:</p>
+<p>将二元分布形象化的最常见方法是散点图，其中每个观察点都指向x和y值。这类似于二维化的rug。你可以用scatterplot()绘制散点图，它也是jointplot()函数显示的默认类型的图:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.jointplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=df);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_27_0.png">
+
+
+<h2 id="Hexbin-plots六方-蜂巢图"><a href="#Hexbin-plots六方-蜂巢图" class="headerlink" title="Hexbin plots六方/蜂巢图"></a>Hexbin plots六方/蜂巢图</h2><p>A bivariate analogue of a histogram is known as a “hexbin” plot, because it shows the counts of observations that fall within hexagonal bins. This plot works best with relatively large datasets. It’s available through in matplotlib as matplotlib.axes.Axes.hexbin() and as a style in jointplot(). It looks best with a white background:</p>
+<p>直方图的双变量模拟图被称为“蜂巢图”，因为它显示了六角形桶内的观察计数。此图最适用于相对较大的数据集。它可以在matplotlib中作为matplotlib.ax .ax .hexbin()获得，也可以作为一种风格在jointplot()中获得。白色背景看起来最好:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x, y = np.random.multivariate_normal(mean, cov, <span class="number">1000</span>).T</span><br><span class="line"><span class="keyword">with</span> sns.axes_style(<span class="string">"white"</span>):</span><br><span class="line">    sns.jointplot(x=x, y=y, kind=<span class="string">"hex"</span>, color=<span class="string">"k"</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_29_0.png">
+
+
+<h2 id="Kernel-density-estimation-二维核密度"><a href="#Kernel-density-estimation-二维核密度" class="headerlink" title="Kernel density estimation 二维核密度"></a>Kernel density estimation 二维核密度</h2><p>It is also possible to use the kernel density estimation procedure described above to visualize a bivariate distribution. In seaborn, this kind of plot is shown with a contour plot and is available as a style in jointplot():</p>
+<p>也可以使用上面描述的核密度估计程序来可视化双变量分布。在seaborn中，这种图用等高表示，在jointplot()中可以作为一种风格使用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.jointplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=df, kind=<span class="string">"kde"</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_31_0.png">
+
+
+<p>You can also draw a two-dimensional kernel density plot with the kdeplot() function. This allows you to draw this kind of plot onto a specific (and possibly already existing) matplotlib axes, whereas the jointplot() function manages its own figure:</p>
+<p>你也可以使用kdeplot()函数绘制二维核密度图。这允许你在一个特定的(可能已经存在的)matplotlib轴上绘制这种绘图，而jointplot()函数管理它自己的图形:【就是简便VS可叠加】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">6</span>))</span><br><span class="line">sns.kdeplot(df.x, df.y, ax=ax)</span><br><span class="line">sns.rugplot(df.x, color=<span class="string">"g"</span>, ax=ax)</span><br><span class="line">sns.rugplot(df.y, vertical=<span class="literal">True</span>, ax=ax);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_33_0.png">
+
+
+<p>If you wish to show the bivariate density more continuously, you can simply increase the number of contour levels:</p>
+<p>还可以画的更加连续–增加contour程度（nlevels）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f, ax = plt.subplots(figsize=(<span class="number">6</span>, <span class="number">6</span>))</span><br><span class="line">cmap = sns.cubehelix_palette(as_cmap=<span class="literal">True</span>, dark=<span class="number">0</span>, light=<span class="number">1</span>, reverse=<span class="literal">True</span>)</span><br><span class="line">sns.kdeplot(df.x, df.y, cmap=cmap, n_levels=<span class="number">60</span>, shade=<span class="literal">True</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_35_0.png">
+
+
+<p>The jointplot() function uses a JointGrid to manage the figure. For more flexibility, you may want to draw your figure by using JointGrid directly. jointplot() returns the JointGrid object after plotting, which you can use to add more layers or to tweak other aspects of the visualization:</p>
+<p>可以使用一个JointGrid来管理图形，从而更加灵活。在绘制之后，返回的是一个JointGrid对象，你可以用它来添加更多的层或者调整可视化的其他方面:</p>
+<p>下图就是添加了tex轴标签，增加了散点在kde上面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g = sns.jointplot(x=<span class="string">"x"</span>, y=<span class="string">"y"</span>, data=df, kind=<span class="string">"kde"</span>, color=<span class="string">"m"</span>)</span><br><span class="line">g.plot_joint(plt.scatter, c=<span class="string">"w"</span>, s=<span class="number">30</span>, linewidth=<span class="number">1</span>, marker=<span class="string">"+"</span>)</span><br><span class="line">g.ax_joint.collections[<span class="number">0</span>].set_alpha(<span class="number">0</span>)</span><br><span class="line">g.set_axis_labels(<span class="string">"$X$"</span>, <span class="string">"$Y$"</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_37_0.png">
+
+
+<h1 id="Visualizing-pairwise-relationships-in-a-dataset可视化数据中的成对关系"><a href="#Visualizing-pairwise-relationships-in-a-dataset可视化数据中的成对关系" class="headerlink" title="Visualizing pairwise relationships in a dataset可视化数据中的成对关系"></a>Visualizing pairwise relationships in a dataset可视化数据中的成对关系</h1><p>To plot multiple pairwise bivariate distributions in a dataset, you can use the pairplot() function. This creates a matrix of axes and shows the relationship for each pair of columns in a DataFrame. By default, it also draws the univariate distribution of each variable on the diagonal Axes:</p>
+<p>要在数据集中绘制多个成对的双变量分布，可以使用pairplot()函数。这将创建一个轴矩阵，并显示DataFrame中每对列的关系。默认情况下，它还绘制每个变量在对角线上的单变量分布:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iris = sns.load_dataset(<span class="string">"iris"</span>)</span><br><span class="line">sns.pairplot(iris);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_39_0.png">
+
+
+<p>Specifying the hue parameter automatically changes the histograms to KDE plots to facilitate comparisons between multiple distributions.</p>
+<p>指定hue参数会自动将直方图更改为KDE图，以方便在多个分布之间进行比较。</p>
+<p>【hue指定的是使用df的里面一个类别标签作为分类标】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(iris, hue=<span class="string">"species"</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_41_0.png">
+
+
+<p>Much like the relationship between jointplot() and JointGrid, the pairplot() function is built on top of a PairGrid object, which can be used directly for more flexibility:</p>
+<p>就像jointplot()和JointGrid之间的关系一样，pairplot()函数是建立在一个PairGrid对象之上的，可以直接使用Grid对象，可以获得更大的灵活性:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g = sns.PairGrid(iris)</span><br><span class="line">g.map_diag(sns.kdeplot)</span><br><span class="line">g.map_offdiag(sns.kdeplot, n_levels=<span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/05/08/python-seaborn-1/output_43_0.png">
       
     </div>
 
@@ -549,8 +756,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -565,7 +781,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -724,6 +940,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualizing-the-distribution-of-a-dataset-数据集分布的可视化"><span class="nav-number">1.</span> <span class="nav-text">Visualizing the distribution of a dataset 数据集分布的可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plotting-univariate-distributions-单变量分布图"><span class="nav-number">1.1.</span> <span class="nav-text">Plotting univariate distributions 单变量分布图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Histograms直方图"><span class="nav-number">1.1.1.</span> <span class="nav-text">Histograms直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel-density-estimation核密度估计"><span class="nav-number">1.1.2.</span> <span class="nav-text">Kernel density estimation核密度估计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fitting-parametric-distributions"><span class="nav-number">1.2.</span> <span class="nav-text">Fitting parametric distributions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plotting-bivariate-distributions-两个变量的分布画图"><span class="nav-number">2.</span> <span class="nav-text">Plotting bivariate distributions 两个变量的分布画图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Scatterplots散点图"><span class="nav-number">2.1.</span> <span class="nav-text">Scatterplots散点图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexbin-plots六方-蜂巢图"><span class="nav-number">2.2.</span> <span class="nav-text">Hexbin plots六方/蜂巢图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-density-estimation-二维核密度"><span class="nav-number">2.3.</span> <span class="nav-text">Kernel density estimation 二维核密度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualizing-pairwise-relationships-in-a-dataset可视化数据中的成对关系"><span class="nav-number">3.</span> <span class="nav-text">Visualizing pairwise relationships in a dataset可视化数据中的成对关系</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
