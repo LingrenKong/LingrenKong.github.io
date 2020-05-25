@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2020/05/12/math-combination-3/image-20200512085511246.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/12/math-combination-3/image-20200512085928972.png">
-<meta property="og:updated_time" content="2020-05-12T02:58:12.173Z">
+<meta property="og:updated_time" content="2020-05-25T08:59:35.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组合数学知识（3）--整数拆分">
 <meta name="twitter:description" content="整数拆分问题(以及Ferrers图)  （组合数学笔记等）">
@@ -368,12 +368,24 @@
                 
               
 
-              <time title="创建时间：2020-05-12 08:06:06 / 修改时间：10:58:12" itemprop="dateCreated datePublished" datetime="2020-05-12T08:06:06+08:00">2020-05-12</time>
+              <time title="创建时间：2020-05-12 08:06:06" itemprop="dateCreated datePublished" datetime="2020-05-12T08:06:06+08:00">2020-05-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-25 16:59:35" itemprop="dateModified" datetime="2020-05-25T16:59:35+08:00">2020-05-25</time>
               
             
           </span>
@@ -447,18 +459,18 @@
 <p>拆分可以是有序的拆分，也可以是无序的拆分，一般都采用<strong>无序</strong>的，即可以调换顺序为同一种，那么每个拆分可以从大到小拆：$n_1 \geq n_2 \geq \cdots n_k \geq 1$，而有序拆分的问题比较容易求解。</p>
 <h1 id="有序拆分"><a href="#有序拆分" class="headerlink" title="有序拆分"></a>有序拆分</h1><p>如果拆分是有序的，可以转换为<strong>投球入盒</strong>问题(n相同球放入m盒子，不允许空)</p>
 <p>记把自然数$n$拆分成$m$个正整数的和，如果有序：<br>$$<br>P’(n,m) = C(n-1,m-1)<br>$$<br>总方法数为：<br>$$<br>P’(n)  = \sum_{m=1}^n P’(n,m) = \sum_{m=1}^n C(n-1,m-1)  =2^{n-1}<br>$$</p>
-<h1 id="无序拆分"><a href="#无序拆分" class="headerlink" title="无序拆分"></a>无序拆分</h1><p>无序拆分的球-盒模型：$n$个无区别的球放入$m$个<strong>无标志盒子</strong></p>
+<h1 id="无序拆分"><a href="#无序拆分" class="headerlink" title="无序拆分"></a>无序拆分</h1><p>无序拆分的球-盒模型：$n$个无区别的球放入$n$个<strong>无标志盒子</strong>，可以放0个或者多个。</p>
 <p>这是很有用的组合数，但是精确表达式难以得到</p>
-<p>对于这一问题，可以用母函数求确定的拆分数，以及对拆分数上界进行估计</p>
+<p>对于这一问题，可以用母函数求确定的拆分数，以及对拆分数上界进行估计$p(n)&lt;e^{\sqrt{\frac{20}{3} n}}$</p>
 <h2 id="整数拆分的相关问题–砝码称重"><a href="#整数拆分的相关问题–砝码称重" class="headerlink" title="整数拆分的相关问题–砝码称重"></a>整数拆分的相关问题–砝码称重</h2><h3 id="无重复情况"><a href="#无重复情况" class="headerlink" title="无重复情况"></a>无重复情况</h3><p>如果有1-4克砝码<strong>各一个</strong>，问可以称那些重量，每个重量有多少方法</p>
 <p>普通母函数：$(1+x)(1+x^2)(1+x^3)(1+x^4)$</p>
-<p>也可以用整数拆分来解释，问那些数字可以进行整数拆分表示为1~4的情况</p>
+<p>也可以用整数拆分来解释，问哪些数字可以进行整数拆分表示为1~4的情况</p>
 <h3 id="有限可重复"><a href="#有限可重复" class="headerlink" title="有限可重复"></a>有限可重复</h3><p>如果有1克3枚，2克4枚，4克2枚<br>$$<br>G(x) = (1+x+x^2+x^3)(1+x^2+x^4+x^6+x^8)(1+x^4+x^8)<br>$$<br>也可以用整数拆分来解释，问那些数字可以进行整数拆分表示为上述有限个和的情况</p>
 <h3 id="无限可重复"><a href="#无限可重复" class="headerlink" title="无限可重复"></a>无限可重复</h3><p>无限情况和一般的有限情况不同</p>
 <p>用1-3角邮票贴出数值，问每个数值的不同方案数（<strong>因为任何面值都能贴出来</strong>）<br>$$<br>G(x) = (1+x+x^2+\cdots) (1+x^2+x^4\cdots) (1+x^3+x^6+\cdots)<br>$$</p>
-<h2 id="回到整数拆分"><a href="#回到整数拆分" class="headerlink" title="回到整数拆分"></a>回到整数拆分</h2><h3 id="有限制整数拆分"><a href="#有限制整数拆分" class="headerlink" title="有限制整数拆分"></a>有限制整数拆分</h3><p>如果限制整数n可以拆分成$1,2 \cdots m$的和，可以重复，求其母函数$G_1(x)$<br>$$<br>\begin{aligned}<br>G_{1}(x)=&amp;\left(1+x+x^{2}+\cdots\right) \<br>&amp;\left(1+x^{2}+x^{4}+\cdots\right) \<br>&amp; \cdots\left(1+x^{m}+x^{2 m}+\cdots\right) \<br>=&amp; \frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)}<br>\end{aligned}<br>$$<br>注意到这种形式的母函数，虽然还是可以表示幂级数成分式，但是<strong>分式十分复杂</strong></p>
-<p>在此基础上可以进行拓展添加一些限制条件，比如如果<strong>要求m至少出现一次</strong>，那么对应m使用情况的项就转化为$(x^m+x^{2m}+ \cdots)$，这是限制最大数m必须存在情况下的母函数$G_2(x)$。<br>$$<br>\begin{aligned}<br>G_{2}(x)=&amp;\left(1+x+x^{2}+\cdots\right) \<br>&amp;\left(1+x^{2}+x^{4}+\cdots\right) \cdots \<br>&amp;\left(x^{m}+x^{2 m}+\cdots\right)  \<br>=&amp; \frac{x^m}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)} \<br>G_{2}(x)=&amp; \frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)} \<br>&amp;-\frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m-1}\right)}<br>\end{aligned}<br>$$<br>第二步的变形很有意思</p>
-<h3 id="无限制整数拆分"><a href="#无限制整数拆分" class="headerlink" title="无限制整数拆分"></a>无限制整数拆分</h3><p>母函数可以写出来，但是这个式子得不出精确表达式来</p>
+<h2 id="回到整数拆分"><a href="#回到整数拆分" class="headerlink" title="回到整数拆分"></a>回到整数拆分</h2><h3 id="有限制整数拆分"><a href="#有限制整数拆分" class="headerlink" title="有限制整数拆分"></a>有限制整数拆分</h3><p>如果限制整数n可以拆分成$1,2 \cdots m$的和，可以重复，求其母函数$G_1(x)$<br>$$<br>G_{1}(x)= \frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)}<br>$$<br>注意到这种形式的母函数，虽然还是可以表示幂级数成分式，但是<strong>分式十分复杂</strong>（而且和m是有关系的）</p>
+<p>在此基础上可以进行拓展添加一些限制条件，比如如果<strong>要求m至少出现一次</strong>，那么对应m使用情况的项就转化为$(x^m+x^{2m}+ \cdots)$，这是限制最大数m必须存在情况下的母函数$G_2(x)$。<br>$$<br>G_{2}(x)=\left(1+x+x^{2}+\cdots\right)<br>\left(1+x^{2}+x^{4}+\cdots\right) \cdots<br>\left(x^{m}+x^{2 m}+\cdots\right)<br>= \frac{x^m}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)}<br>$$<br>还可以做个变形：<br>$$<br>G_{2}(x)= \frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m}\right)}<br>-\frac{1}{(1-x)\left(1-x^{2}\right) \cdots\left(1-x^{m-1}\right)}<br>$$</p>
+<h3 id="无限制整数拆分"><a href="#无限制整数拆分" class="headerlink" title="无限制整数拆分"></a>无限制整数拆分</h3><p>母函数可以写出来，但是这个式子得不出精确表达式来（即把有限制中的m换成$\cdots$）</p>
 <p>我们要处理的问题：</p>
 <ul>
 <li>给定n求拆分数–利用母函数求解$\frac{1}{(1-x)\left(1-x^{2}\right)\left(1-x^{3}\right) \cdots}$</li>
@@ -478,8 +490,8 @@
 
 
 
-<h3 id="整数分拆性质"><a href="#整数分拆性质" class="headerlink" title="整数分拆性质"></a>整数分拆性质</h3><p>把整数拆分为最大数为k的拆分方法数，和把数拆分为k个数的拆分方法数相同</p>
-<p>把整数拆分为最大至多为k的拆分方法数，和把数拆分为至多k个数的拆分方法数相同</p>
+<h3 id="整数分拆性质"><a href="#整数分拆性质" class="headerlink" title="整数分拆性质"></a>整数分拆性质</h3><p>把整数$n$拆分为最大数为k的拆分方法数，和把数$n$拆分为k个数的拆分方法数相同</p>
+<p>把整数n拆分为最多为m个数的拆分方法数，和把数n拆分为数字最大为m的拆分方法数相同</p>
 <p>【利用ferrers共轭可以构建一一对应】</p>
 <p>把整数拆分成互不相同的若干个<strong>奇数</strong>的和的拆分数，和把n拆分成由<strong>自共轭</strong>的Ferrers图的拆分数相同</p>
 <img src="/2020/05/12/math-combination-3/image-20200512085928972.png">
@@ -606,7 +618,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
