@@ -94,14 +94,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="python-pd">
+  <meta name="description" content="pandas学习笔记第三节，如果不使用[]我们要如何操作数据表。 pandas有些操作会反复使用[]来进行操作，但是写起来复杂而且容易让初学者看不懂/写错，但是除了这种经典的方法其实还有其他解决办法。">
+<meta name="keywords" content="Python,Pandas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas学习笔记（3）">
 <meta property="og:url" content="http://yoursite.com/2020/12/06/python-pd-3/index.html">
 <meta property="og:site_name" content="孔令仁的个人博客">
+<meta property="og:description" content="pandas学习笔记第三节，如果不使用[]我们要如何操作数据表。 pandas有些操作会反复使用[]来进行操作，但是写起来复杂而且容易让初学者看不懂/写错，但是除了这种经典的方法其实还有其他解决办法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-06T03:47:30.169Z">
+<meta property="og:updated_time" content="2020-12-26T14:47:36.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python-pd">
+<meta name="twitter:title" content="pandas学习笔记（3）">
+<meta name="twitter:description" content="pandas学习笔记第三节，如果不使用[]我们要如何操作数据表。 pandas有些操作会反复使用[]来进行操作，但是写起来复杂而且容易让初学者看不懂/写错，但是除了这种经典的方法其实还有其他解决办法。">
 
 
 
@@ -119,7 +123,7 @@
   };
 </script>
 
-  <title>python-pd | 孔令仁的个人博客</title>
+  <title>pandas学习笔记（3） | 孔令仁的个人博客</title>
   
 
 
@@ -352,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python-pd
+          <h1 class="post-title" itemprop="name headline">pandas学习笔记（3）
 
               
             
@@ -382,8 +386,49 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-26 22:47:36" itemprop="dateModified" datetime="2020-12-26T22:47:36+08:00">2020-12-26</time>
+              
+            
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -413,7 +458,30 @@
       
 
       
-        <a id="more"></a>
+        <p>pandas学习笔记第三节，如果不使用<code>[]</code>我们要如何操作数据表。</p>
+<p>pandas有些操作会反复使用<code>[]</code>来进行操作，但是写起来复杂而且容易让初学者看不懂/写错，但是除了这种经典的方法其实还有其他解决办法。</p>
+<a id="more"></a>
+
+<p>内容先记下来，具体文档细节有待细化</p>
+<h1 id="取一列"><a href="#取一列" class="headerlink" title="取一列"></a>取一列</h1><p>如果取出一列，直接用<code>df[&#39;colname&#39;]</code>就行，但是实际上pandas还有另外一种方式，就是直接取df对象的属性，<code>df.colname</code>如果本身不是属性那么就可以等效于<code>[]</code>的取法。</p>
+<p>这个的实现我还没搞懂理论依据</p>
+<h1 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h1><p>经典操作是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'newcol'</span>] = value</span><br></pre></td></tr></table></figure>
+
+<p>但是也可以使用<code>assign</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.assign(newcol = value)</span><br></pre></td></tr></table></figure>
+
+<p>而且这里不仅支持外部变量，也可以调用df本身的列</p>
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.assign.html" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.assign.html</a></p>
+<h1 id="通用计算"><a href="#通用计算" class="headerlink" title="通用计算"></a>通用计算</h1><p>如果计算一个内容涉及df多列会有点麻烦，但是利用<code>eval</code>函数可以比较简洁的进行求值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.eval(<span class="string">'y=2*x1+3*x2'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.eval.html" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.eval.html</a></p>
+<h1 id="执行轻微复杂的查询"><a href="#执行轻微复杂的查询" class="headerlink" title="执行轻微复杂的查询"></a>执行轻微复杂的查询</h1><p>如果执行复杂的查询，用apply自己编写一个函数就可以，但是如果是多条件筛选这种，其实可以用SQL式的思路来实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.query(<span class="string">'A==1 and B==2'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html" target="_blank" rel="noopener">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.query.html</a></p>
+
       
     </div>
 
@@ -433,6 +501,17 @@
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          
+        </div>
       
 
       
@@ -495,8 +574,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -686,6 +774,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#取一列"><span class="nav-number">1.</span> <span class="nav-text">取一列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#赋值"><span class="nav-number">2.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通用计算"><span class="nav-number">3.</span> <span class="nav-text">通用计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#执行轻微复杂的查询"><span class="nav-number">4.</span> <span class="nav-text">执行轻微复杂的查询</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

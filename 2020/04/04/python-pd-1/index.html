@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="孔令仁的个人博客">
 <meta property="og:description" content="pandas学习笔记第一节，pandas输入输出">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-04-04T04:02:44.730Z">
+<meta property="og:updated_time" content="2020-12-26T14:22:12.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pandas学习笔记（1）">
 <meta name="twitter:description" content="pandas学习笔记第一节，pandas输入输出">
@@ -382,12 +382,24 @@
                 
               
 
-              <time title="创建时间：2020-04-04 11:10:32 / 修改时间：12:02:44" itemprop="dateCreated datePublished" datetime="2020-04-04T11:10:32+08:00">2020-04-04</time>
+              <time title="创建时间：2020-04-04 11:10:32" itemprop="dateCreated datePublished" datetime="2020-04-04T11:10:32+08:00">2020-04-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-26 22:22:12" itemprop="dateModified" datetime="2020-12-26T22:22:12+08:00">2020-12-26</time>
               
             
           </span>
@@ -451,27 +463,32 @@
 
 <h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><p>pandas入门第一步是导入导出文件来建立dataframe</p>
 <p>虽然看似很简单，但是过程中涉及到的一些函数参数有时候是容易搞不清的</p>
-<h1 id="read-html"><a href="#read-html" class="headerlink" title="read_html"></a>read_html</h1><p>对于普通的HTML表格内容，可以不使用复杂爬虫，直接用pandas，调用lxml包抓取（但是对于花里胡哨jd动态表无效）</p>
+<h1 id="read-html"><a href="#read-html" class="headerlink" title="read_html"></a>read_html</h1><p>对于普通的HTML表格内容，可以不使用复杂爬虫，直接用pandas，调用lxml包抓取（但是对于花里胡哨的JavaScript动态表无效）</p>
 <p>注意：返回的结果是<strong>DataFrame</strong>组成的<strong>list</strong>。</p>
 <p>下面这个是一个示例，抓取QS的排名</p>
-<p>网页内有4个table（这个是个小问题，就是HTML会在一些并不是表单的地方使用table），第四个是排名表</p>
+<p>网页内有4个table（这个是个小问题，就是HTML会在一些并不是表单的地方使用table来进行排版），第四个是排名表</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">dfs = pd.read_html(<span class="string">'http://rankings.betteredu.net/qs/world-university-rankings/latest/2019-2020.html'</span>)</span><br><span class="line">df = dfs[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
 
 <p>函数参数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pandas.read_html(io, match=&apos;.+&apos;, flavor=None, header=None, index_col=None, skiprows=None, attrs=None, parse_dates=False, thousands=&apos;, &apos;, encoding=None, decimal=&apos;.&apos;, converters=None, na_values=None, keep_default_na=True, displayed_only=True)</span><br></pre></td></tr></table></figure>
 
-<p>常用的参数（<a href="https://pandas.pydata.org/docs/reference/api/pandas.read_html.html）：" target="_blank" rel="noopener">https://pandas.pydata.org/docs/reference/api/pandas.read_html.html）：</a><br>io:可以是url、html文本、本地文件等；【lxml不能接受https对象，请删除s】</p>
-<p>attrs：识别标志，如果会html可以用于找到具体的表</p>
+<p>常用的参数（<a href="https://pandas.pydata.org/docs/reference/api/pandas.read_html.html）：" target="_blank" rel="noopener">https://pandas.pydata.org/docs/reference/api/pandas.read_html.html）：</a></p>
+<ul>
+<li><p>io:可以是url、html文本、本地文件等；【注意lxml不能接受https对象，请删除s】</p>
+</li>
+<li><p>attrs：识别标志，如果会html可以用于找到具体的表</p>
+</li>
+</ul>
 <h1 id="read-csv"><a href="#read-csv" class="headerlink" title="read_csv"></a>read_csv</h1><p><code>import pandas as pd</code></p>
 <p><code>df = pd.read_csv(path)</code></p>
 <p>最基础的就是直接给一个csv文件路径，即可导入一个文件生成df</p>
-<h2 id="利用已有index"><a href="#利用已有index" class="headerlink" title="利用已有index"></a>利用已有index</h2><p><code>index_col=0</code>指定第一列为df的index</p>
+<h2 id="利用已有index"><a href="#利用已有index" class="headerlink" title="利用已有index"></a>利用已有index</h2><p><code>index_col=0</code>指定第一列为df的index，这个往往适用于pandas导出的csv，因为这种csv的第一列就是index。</p>
 <h2 id="其他分隔符"><a href="#其他分隔符" class="headerlink" title="其他分隔符"></a>其他分隔符</h2><p><code>sep=&#39;,&#39;</code></p>
-<p>除了csv逗号分隔，也有其他格式分隔的数据，比如常见的tsv（TAB分隔），或者自己输出的自定义分隔符分隔的txt文件，这些都是用同一个函数实现的。</p>
+<p>除了csv逗号分隔，也有其他格式分隔的数据，比如常见的tsv（TAB分隔），或者自己输出的自定义分隔符分隔的txt文件，这些都是用同一个函数实现的。如果数据中有字符串，就容易出现逗号被错误解释的情况。</p>
 <h1 id="df-to-csv"><a href="#df-to-csv" class="headerlink" title="df.to_csv"></a>df.to_csv</h1><p><code>df.to_csv(path)</code></p>
 <p>最基础就是给定文件导出路径即可</p>
 <h2 id="不输出index"><a href="#不输出index" class="headerlink" title="不输出index"></a>不输出index</h2><p><code>index=None</code></p>
-<p>利用这个关键词参数，可以避免导出pd给定的index，这样输出的内容和导入内容的形式是相同的。</p>
+<p>利用这个关键词参数，可以避免导出pd给定的index，这样输出的内容和导入内容的默认形式是相同的。</p>
 
       
     </div>
