@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://lingrenkong.github.io/sitemap.xml
