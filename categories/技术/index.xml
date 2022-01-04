@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>技术 on 至诚居</title>
+    <link>/categories/%E6%8A%80%E6%9C%AF/</link>
+    <description>Recent content in 技术 on 至诚居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从Jekyll迁移到Hugo</title>
+      <link>/2022/01/04/jekyll2hugo/</link>
+      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/01/04/jekyll2hugo/</guid>
+      <description>情况分析 说来惭愧，从之前的Hexo迁移到jekyll没多久，就又转移到了基于Blogdown的Hugo。
+主要原因还是在于，虽然jekyll对于提交比较友好，但是用着发现模板并不太好使，而且创建post不太方便，正好发现Blogdown把问题都用Rstudio安排了，而且Rmd格式和插入图片也有处理（插入到文件路径中，不是链接但是可以省掉图床工作），所以就转了。
+模板 看文档发现建议不要随便用不一样的Hugo模板，所以就保留了原来的模板，对于logo这种轻度定制的东西进行了修改。
+数据迁移 Hugo的挖墙脚确实厉害，居然提供了一个数据转换的教程，而且本身应用里面还有这样一个命令行操作：
+hugo import jekyll jekyll_root_path target_path（hugo项目的根）可惜的是这样的命令行移动不太行，是直接移动文件，和当前的作为index.md放在文件夹不是一致的，所以正好我的博客不多，就慢慢手动迁移了。</description>
+    </item>
+    
+  </channel>
+</rss>

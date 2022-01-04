@@ -5,14 +5,59 @@
     <link>/</link>
     <description>Recent content on 至诚居</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从Jekyll迁移到Hugo</title>
+      <link>/2022/01/04/jekyll2hugo/</link>
+      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/01/04/jekyll2hugo/</guid>
+      <description>情况分析 说来惭愧，从之前的Hexo迁移到jekyll没多久，就又转移到了基于Blogdown的Hugo。
+主要原因还是在于，虽然jekyll对于提交比较友好，但是用着发现模板并不太好使，而且创建post不太方便，正好发现Blogdown把问题都用Rstudio安排了，而且Rmd格式和插入图片也有处理（插入到文件路径中，不是链接但是可以省掉图床工作），所以就转了。
+模板 看文档发现建议不要随便用不一样的Hugo模板，所以就保留了原来的模板，对于logo这种轻度定制的东西进行了修改。
+数据迁移 Hugo的挖墙脚确实厉害，居然提供了一个数据转换的教程，而且本身应用里面还有这样一个命令行操作：
+hugo import jekyll jekyll_root_path target_path（hugo项目的根）可惜的是这样的命令行移动不太行，是直接移动文件，和当前的作为index.md放在文件夹不是一致的，所以正好我的博客不多，就慢慢手动迁移了。</description>
+    </item>
+    
     <item>
       <title>2022 新年愿景</title>
       <link>/2022/01/01/2022-new-years-resolutions/</link>
       <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>/2022/01/01/2022-new-years-resolutions/</guid>
-      <description>&lt;p&gt;2022 新年愿景 ~&lt;/p&gt;</description>
+      <description>2022 新年愿景 ~
+愿望 希望可以快乐生活，帮到更多的人。
+创造 希望可以成为开源社区的开发者，做一些确实能够帮助他人的轮子
+健康 希望身体健康，早睡早起~
+生活 多看看大好河山，走走，拍拍</description>
+    </item>
+    
+    <item>
+      <title>ggplot2 踩坑 | ylim 函数</title>
+      <link>/2021/12/23/ggplot2-ylim/</link>
+      <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/12/23/ggplot2-ylim/</guid>
+      <description>ggplot2::ylim看起来很好很直接，但是实际上却会删去你的数据！
+ggplot2踩坑比如我们研究一个这样的概率模型（例子来自于贝特朗奇论的一种模式）：
+\[p(x)=\frac{x}{\sqrt{1-x^2}},\quad x\in [0,1]\]
+set.seed(42)x = runif(10000,min=0,max=1)f = function(x){sqrt(1-(x-1)^2)}p = f(x)library(ggplot2)df &amp;lt;- data.frame(x=x,p=p)那么\(x\rightarrow1\)的尾部就会出现数据趋向于无穷的情况，导致图例和真实数据模拟的直方图、密度图不一致。如果直接用ylim 确实可以控制输出范围，但是结果就如下图区别，导致原始数据丢失，其他图片也不对了。
+ggplot(df, aes(x=p)) +geom_histogram(aes(y=..density..),bins = 50) + geom_density(alpha=.2, size=0.7) + geom_vline(aes(xintercept=sqrt(3)/2),color=&amp;quot;blue&amp;quot;, linetype=&amp;quot;dashed&amp;quot;, size=1)+geom_function(aes(x=x),fun = function(y){y/(sqrt(1-y^2))},colour = &amp;quot;red&amp;quot;,linetype=&amp;quot;dotted&amp;quot;, size=1) +ylim(0,5)## Warning: Removed 2 rows containing missing values (geom_bar).## Warning: Removed 2 row(s) containing missing values (geom_path).</description>
+    </item>
+    
+    <item>
+      <title>np学习笔记--随机数功能</title>
+      <link>/2020/05/01/np-rand/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/01/np-rand/</guid>
+      <description>文档太多，反而是python的help效果更好~
+这里的Python基于Rmd的reticulate包。
+模块总览import numpy as npnp.random.seed(42)np的random库是一个功能很强的库，可以替代Python本身的random（所以不要同时导入这两个）
+通过查看包的__init__.py可以了解其中的功能（有点多）
+其中分为几块：
+Utility functions：效用函数？（大概就是常用的意思吧）Compatibility function：兼容功能（相对比较新的函数）Univariate distributions：单变量分布生成Multivariate distributions：多变量分布生成Standard distributions：标准分布（如标准正态、标准\(\Gamma\)分布等）Internal functions：检查随机数生成器的当前状态对于指定分布的生产，在使用的时候通过文档查询即可，但是常用的随机数操作功能需要熟练使用，因此本文学习常用的。
+========================Random Number Generation============================================ =========================================================Utility functions==============================================================================random_sample Uniformly distributed floats over ``[0, 1)``.random Alias for `random_sample`.bytes Uniformly distributed random bytes.random_integers Uniformly distributed integers in a given range.permutation Randomly permute a sequence / generate a random sequence.</description>
     </item>
     
     <item>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.91.2" />
+
+
+<title>从Jekyll迁移到Hugo - 至诚居</title>
+<meta property="og:title" content="从Jekyll迁移到Hugo - 至诚居">
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/mylogo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">主页</a></li>
+    
+    <li><a href="/about">关于</a></li>
+    
+    <li><a href="/categories/">分类</a></li>
+    
+    <li><a href="/tags/">标签</a></li>
+    
+    <li><a href="https://github.com/LingrenKong">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">从Jekyll迁移到Hugo</h1>
+
+    
+    <span class="article-date">2022-01-04</span>
+    
+
+    <div class="article-content">
+      <h1 id="情况分析">情况分析</h1>
+<p>说来惭愧，从之前的Hexo迁移到jekyll没多久，就又转移到了基于Blogdown的Hugo。</p>
+<p>主要原因还是在于，虽然jekyll对于提交比较友好，但是用着发现模板并不太好使，而且创建post不太方便，正好发现Blogdown把问题都用Rstudio安排了，而且Rmd格式和插入图片也有处理（插入到文件路径中，不是链接但是可以省掉图床工作），所以就转了。</p>
+<img src="images/mylogo.png" alt="我的logo" width="50%" height="50%"/>
+<h1 id="模板">模板</h1>
+<p>看文档发现建议不要随便用不一样的Hugo模板，所以就保留了原来的模板，对于logo这种轻度定制的东西进行了修改。</p>
+<h1 id="数据迁移">数据迁移</h1>
+<p>Hugo的挖墙脚确实厉害，居然提供了一个数据转换的<a href="https://gohugo.io/tools/migrations/">教程</a>，而且本身应用里面还有这样一个命令行操作：</p>
+<pre tabindex="0"><code>hugo import jekyll jekyll_root_path target_path（hugo项目的根）
+</code></pre><p>可惜的是这样的命令行移动不太行，是直接移动文件，和当前的作为<code>index.md</code>放在文件夹不是一致的，所以正好我的博客不多，就慢慢手动迁移了。</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
