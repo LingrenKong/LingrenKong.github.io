@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数学 on 至诚居</title>
+    <link>/categories/%E6%95%B0%E5%AD%A6/</link>
+    <description>Recent content in 数学 on 至诚居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间</title>
+      <link>/2022/01/04/functional-review-chap9/</link>
+      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/01/04/functional-review-chap9/</guid>
+      <description>第九章 内积空间和希尔伯特（Hilbert）空间 内积空间 重要概念 内积（注意共轭）：
+ 非负性：$\langle x, x\rangle \geq 0, \forall x \in X ;\langle x, x\rangle=0 \Leftrightarrow x=\theta$; 对称性：$\langle x, y\rangle=\overline{\langle y, x\rangle}, \forall x, y \in X$; 加法：$\left\langle x_{1}+x_{2}, y\right\rangle=\left\langle x_{1}, y\right\rangle+\left\langle x_{2}, y\right\rangle, \forall x_{1}, x_{2}, y \in X$; 数乘： $\langle\lambda x, y\rangle=\lambda\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X$;  其中第3&amp;amp;4条在$F=\mathbb R$实数情况下被称作双线性。
+复数情况下，34的对称版本是：
+ 加法不受影响：$\left\langle x, y_{1}+y_{2}\right\rangle=\left\langle x, y_{1}\right\rangle+\left\langle x, y_{2}\right\rangle, \forall x,y_{1}+y_{2} \in X$ 数乘需要共轭：$\langle x, \lambda y\rangle=\overline{\lambda}\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X$  Hilbert空间：内积空间按照内积导出的范数完备（所以Hilbert空间一定是Banach空间）</description>
+    </item>
+    
+  </channel>
+</rss>
