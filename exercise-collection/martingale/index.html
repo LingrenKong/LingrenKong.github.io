@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.91.2" />
+
+
+<title>随机过程习题（鞅） - 至诚居</title>
+<meta property="og:title" content="随机过程习题（鞅） - 至诚居">
+
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/mylogo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">主页</a></li>
+    
+    <li><a href="/about">关于</a></li>
+    
+    <li><a href="/categories/">分类</a></li>
+    
+    <li><a href="/tags/">标签</a></li>
+    
+    <li><a href="/tutorial/">教程</a></li>
+    
+    <li><a href="/note/">笔记</a></li>
+    
+    <li><a href="https://github.com/LingrenKong">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">随机过程习题（鞅）</h1>
+
+    
+
+    <div class="article-content">
+      <p>假设 <code>\(\left\{X_{n}, n=0,1,2, \cdots\right\}\)</code> 是随机变量序列, 令 <code>\(Y_{n}=\sum_{i=0}^n X_{i}, n \geq 1\)</code> 。若 <code>\(\left\{Y_{n}, n=0,1, \cdots\right\}\)</code> 是关于 <code>\(\left\{X_{n}, n=0, i, \cdots\right\}\)</code> 的一个鞅。证明: 对任意的 <code>\(0 \leq i \neq j, E(X_i, X_j)=0\)</code>  。</p>
+<p>证：</p>
+<p>不妨设 <code>\(i&lt;j\)</code> ，那么根据鞅的定义，有：</p>
+<p>$$
+E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]=Y_{j-1}
+$$
+带入 <code>\(Y_n=\sum_{i=0}^n X_{i}\)</code> 到上面左侧式子：
+$$
+<code>\begin{aligned} &amp;E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]\\ =&amp;E[\sum_{i=0}^j X_{i}\mid\sigma(X_0\cdots X_{j-1})]\quad \text{用期望线性性质}\\ =&amp;E[\sum_{i=0}^{j-1} X_{i}\mid\sigma(X_0\cdots X_{j-1})]+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\quad \\ =&amp;Y_{j-1}+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})] \end{aligned}</code>
+$$
+所以可以得到：
+$$
+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]=0
+$$
+接下来对于式子 <code>\(E[X_iX_j]\)</code> 应用重期望展开：
+$$
+<code>\begin{aligned} E[X_i X_j]&amp;=E[E[X_i X_j\mid\sigma(X_0\cdots X_{j-1})]]\\ &amp;=E[X_i \cdot E[X_j\mid\sigma(X_0\cdots X_{j-1})]]\\ &amp;=E[X_i \cdot 0]=0 \end{aligned}</code>
+$$</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

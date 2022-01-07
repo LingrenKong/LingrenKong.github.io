@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>习题 on 至诚居</title>
+    <link>/tags/%E4%B9%A0%E9%A2%98/</link>
+    <description>Recent content in 习题 on 至诚居</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/tags/%E4%B9%A0%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>随机过程习题（鞅）</title>
+      <link>/exercise-collection/martingale/</link>
+      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/exercise-collection/martingale/</guid>
+      <description>假设 \(\left\{X_{n}, n=0,1,2, \cdots\right\}\) 是随机变量序列, 令 \(Y_{n}=\sum_{i=0}^n X_{i}, n \geq 1\) 。若 \(\left\{Y_{n}, n=0,1, \cdots\right\}\) 是关于 \(\left\{X_{n}, n=0, i, \cdots\right\}\) 的一个鞅。证明: 对任意的 \(0 \leq i \neq j, E(X_i, X_j)=0\) 。
+证：
+不妨设 \(i&amp;lt;j\) ，那么根据鞅的定义，有：
+$$ E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]=Y_{j-1} $$ 带入 \(Y_n=\sum_{i=0}^n X_{i}\) 到上面左侧式子： $$ \begin{aligned}&amp;amp;E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]\\=&amp;amp;E[\sum_{i=0}^j X_{i}\mid\sigma(X_0\cdots X_{j-1})]\quad \text{用期望线性性质}\\=&amp;amp;E[\sum_{i=0}^{j-1} X_{i}\mid\sigma(X_0\cdots X_{j-1})]+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\quad \\=&amp;amp;Y_{j-1}+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\end{aligned} $$ 所以可以得到： $$ E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]=0 $$ 接下来对于式子 \(E[X_iX_j]\) 应用重期望展开： $$ \begin{aligned}E[X_i X_j]&amp;amp;=E[E[X_i X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot E[X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot 0]=0\end{aligned} $$</description>
+    </item>
+    
+  </channel>
+</rss>

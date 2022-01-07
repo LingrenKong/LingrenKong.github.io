@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.91.2" />
+
+
+<title>寒假Python修行DAY1：Python学习建议 - 至诚居</title>
+<meta property="og:title" content="寒假Python修行DAY1：Python学习建议 - 至诚居">
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/mylogo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">主页</a></li>
+    
+    <li><a href="/about">关于</a></li>
+    
+    <li><a href="/categories/">分类</a></li>
+    
+    <li><a href="/tags/">标签</a></li>
+    
+    <li><a href="/tutorial/">教程</a></li>
+    
+    <li><a href="/note/">笔记</a></li>
+    
+    <li><a href="https://github.com/LingrenKong">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">寒假Python修行DAY1：Python学习建议</h1>
+
+    
+
+    <div class="article-content">
+      <h1 id="课程内容">课程内容</h1>
+<h2 id="整体建议">整体建议</h2>
+<ol>
+<li>
+<p>Python社区很广，学不完的，所以请按需学习，掌握搜索技巧</p>
+</li>
+<li>
+<p>学会使用论坛文档的资源</p>
+<ol>
+<li>搜索引擎（推荐bing）</li>
+<li>论坛与博客：CSDN/Stack Overflow</li>
+<li>英文<strong>看得懂</strong>（不是英语好）很重要</li>
+<li><strong>适当</strong>合理使用文档</li>
+</ol>
+</li>
+<li>
+<p>自己锻炼自己（具体问题具体分析）</p>
+<ol>
+<li>kaggle学习与比赛</li>
+<li>刷LeetCode等</li>
+<li>写个人博客</li>
+</ol>
+</li>
+</ol>
+<p>欢迎关注RUC统计调查协会:
+<img src="images/%E7%BB%9F%E8%AE%A1%E8%B0%83%E6%9F%A5%E5%8D%8F%E4%BC%9A%E5%85%AC%E4%BC%97%E5%8F%B7.png" alt="欢迎关注RUC统计调查协会"></p>
+<h2 id="关于package">关于package</h2>
+<p>参考：<a href="https://www.runoob.com/python3/python3-module.html">菜鸟教程Python3</a></p>
+<h2 id="安装和虚拟环境">安装和虚拟环境</h2>
+<p>conda换源加速：</p>
+<pre tabindex="0"><code>conda clean -i 去掉之前的源
+
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
+特殊的源（完整版见官网，forge比较常见，Pytorch深度学习要用）
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ 
+
+conda config --set show_channel_urls yes 有了这个就可以找到.condarc文件，可以直接替换操作
+</code></pre><p>完整介绍见这里：<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华镜像</a></p>
+<blockquote>
+<p>注：软件增加后，solving environment还是会慢，因为conda会试图调和所有环境依赖项。</p>
+</blockquote>
+<p>pip也可以换源加速：</p>
+<pre tabindex="0"><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PACKAGE
+</code></pre><p>这里通过<code>-i</code>可以临时指定用国内清华镜像。（永久修改比较麻烦，且比较小的包PYPI其实不慢，相比conda好得多）</p>
+<p>创建R语言的虚拟环境：</p>
+<pre tabindex="0"><code>conda create -n r36 r=3.6
+</code></pre><p>创建Python的虚拟环境：</p>
+<pre tabindex="0"><code>conda create -n py37 python=3.7
+</code></pre><p>如何在base同时看到其他环境的kernel</p>
+<pre tabindex="0"><code>conda install nb_conda_kernels 在base安装
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple ipykernel 在所有Python环境安装
+conda install -c r r-irkernel 在所有R环境安装
+</code></pre><h1 id="练习题">练习题：</h1>
+<h2 id="hello-world">Hello World</h2>
+<p>在安装和配置完成后，就可以尝试编程学习的传统艺能“Hello World”了。</p>
+<p>请尝试在以下几种情况输出你的“Hello World”</p>
+<ul>
+<li>创建一个<code>.py</code>文件，运行输出</li>
+<li>创建一个<code>.ipynb</code>文件，在jupyter中输出</li>
+<li>打开你的命令行，运用命令行的Python输出（<strong>附加题1</strong>：你的cmd可以直接用conda吗？为什么）</li>
+</ul>
+<p>使用的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">print(<span style="color:#e6db74">&#39;Hello World&#39;</span>)
+</code></pre></div><h2 id="安装和导入常用的包">安装和导入常用的包</h2>
+<p>以下是之后会用到的import操作，请尝试并自行下载没有安装的包</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+<span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#66d9ef">as</span> plt
+<span style="color:#f92672">import</span> seaborn <span style="color:#66d9ef">as</span> sns
+
+<span style="color:#f92672">from</span> tqdm <span style="color:#f92672">import</span> tqdm 
+<span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime <span style="color:#75715e">#附加题2：为什么这里是这个样子</span>
+<span style="color:#f92672">import</span> pandas_profiling <span style="color:#66d9ef">as</span> pp 
+<span style="color:#75715e">#附加题3：思考一下，有些包的import和pip不一致，或者不只有字母</span>
+<span style="color:#75715e">#这个包本身叫什么</span>
+</code></pre></div><p>注：</p>
+<ul>
+<li>附加题1关于环境安装</li>
+<li>附加题2较为简单且经典</li>
+<li>附加题3是小概率会遇到的情况</li>
+</ul>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

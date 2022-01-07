@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.91.2" />
+
+
+<title>泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间 - 至诚居</title>
+<meta property="og:title" content="泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间 - 至诚居">
+
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/mylogo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/">主页</a></li>
+    
+    <li><a href="/about">关于</a></li>
+    
+    <li><a href="/categories/">分类</a></li>
+    
+    <li><a href="/tags/">标签</a></li>
+    
+    <li><a href="/tutorial/">教程</a></li>
+    
+    <li><a href="/note/">笔记</a></li>
+    
+    <li><a href="https://github.com/LingrenKong">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间</h1>
+
+    
+
+    <div class="article-content">
+      <h1 id="第九章-内积空间和希尔伯特hilbert空间">第九章 内积空间和希尔伯特（Hilbert）空间</h1>
+<h2 id="内积空间">内积空间</h2>
+<h3 id="重要概念">重要概念</h3>
+<p>内积（注意共轭）：</p>
+<ol>
+<li>非负性：  <code>\(\langle x, x\rangle \geq 0, \forall x \in X ;\langle x, x\rangle=0 \Leftrightarrow x=\theta\)</code></li>
+<li>对称性：  <code>\(\langle x, y\rangle=\overline{\langle y, x\rangle}, \forall x, y \in X\)</code></li>
+<li>加法：  <code>\(\left\langle x_{1}+x_{2}, y\right\rangle=\left\langle x_{1}, y\right\rangle+\left\langle x_{2}, y\right\rangle, \forall x_{1}, x_{2}, y \in X\)</code></li>
+<li>数乘：  <code>\(\langle\lambda x, y\rangle=\lambda\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)</code></li>
+</ol>
+<p>其中第3&amp;4条在  <code>\(F=\mathbb R\)</code>  实数情况下被称作双线性。</p>
+<p>复数情况下，34的对称版本是：</p>
+<ul>
+<li>加法不受影响：  <code>\(\left\langle x, y_{1}+y_{2}\right\rangle=\left\langle x, y_{1}\right\rangle+\left\langle x, y_{2}\right\rangle, \forall x,y_{1}+y_{2} \in X\)</code></li>
+<li>数乘需要共轭：  <code>\(\langle x, \lambda y\rangle=\overline{\lambda}\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)</code></li>
+</ul>
+<p>Hilbert空间：内积空间按照内积导出的范数完备（所以Hilbert空间一定是Banach空间）</p>
+<h3 id="关键定理">关键定理</h3>
+<ol>
+<li>Schwartz不等式（涉及内积注意<strong>根号和平方</strong>的问题）：</li>
+</ol>
+<p>$$
+|\langle x, y\rangle| \leq \sqrt{\langle x, x\rangle} \cdot \sqrt{\langle y, y\rangle}
+$$</p>
+<p>推导基本和欧式空间一样，还是展开  <code>\(\langle x+\lambda y, x+\lambda y\rangle \ge0\)</code>  的展开式，不过要稍微注意一下复数和共轭。</p>
+<ol start="2">
+<li>从内积导出范数（所以内积空间必定是赋范线性空间）：</li>
+</ol>
+<p>设  <code>\(X\)</code>  为内积空间, 对任  <code>\(x \in X\)</code> , 令  <code>\(\|x\|=\sqrt{\langle x, x\rangle}\)</code>  , 则   <code>\(\|x\|\)</code>   是   <code>\(x\)</code>   的范数.</p>
+<p>证明：验证范数性质（主要是三角不等式）</p>
+<ol start="3">
+<li>内积的连续性</li>
+</ol>
+<p>设  <code>\(\lim _{n \rightarrow \infty} x_{n}=x, \lim _{n \rightarrow \infty} y_{n}=y\)</code> , 则有：</p>
+<p>$$
+\lim_{n \rightarrow \infty}\left\langle x_{n},y_{n}\right\rangle=\langle\lim_{n \rightarrow \infty} x_{n}, \lim_{n \rightarrow \infty} y_{n}\rangle=\langle x, y\rangle
+$$</p>
+<p>证明思路：Schwarz不等式裂项（类似的还有其他几个连续性证明题）</p>
+<ol start="4">
+<li>极化恒等式（用范数表示出内积）</li>
+</ol>
+<p>$$
+\langle x, y\rangle=\frac{1}{4}\left(|x+y|^{2}-|x-y|^{2}+i|x+i y|^{2}-i|x-i y|^{2}\right)
+$$</p>
+<p>实数只有前两项。</p>
+<ol start="5">
+<li>平行四边形公式（必要条件，<strong>快速证伪</strong>，检验一个范数不是内积）</li>
+</ol>
+<p>$$
+|x+y|^{2}+| x-y |^{2}=2\left(|x|^{2}+|y|^{2}\right)
+$$</p>
+<h3 id="经典结论">经典结论</h3>
+<p><code>\(l_2\)</code> 是Hilbert空间</p>
+<p>二次可积函数空间 <code>\(L^2(E),E\)</code> 有限无限均可, <code>\(\langle x,y\rangle=\int_E x(t)\overline{y(t)}dt\)</code> 也是Hilbert空间</p>
+<h2 id="投影定理">投影定理</h2>
+<h3 id="重要概念-1">重要概念</h3>
+<p>正交：</p>
+<ol>
+<li>元素正交（基础）： <code>\(\langle x,y\rangle=0\)</code></li>
+<li>元素与子集合</li>
+<li>两个子集合</li>
+<li>正交补</li>
+</ol>
+<p>正交投影：</p>
+<p>$$
+x\in X:x_0\in M,z \in M^\perp,x=x_0+z
+$$</p>
+<p>称 <code>\(x_0\)</code> 是x在 <code>\(M\)</code> 上的正交投影</p>
+<p>最佳逼近元：不一定存在，也不一定唯一</p>
+<p>$$
+d(x,M):=\inf_{y\in M}d(x,y)\
+x_0\in M ,d(x,x_0)=d(x,M)
+$$</p>
+<p>那么 <code>\(x_0\in M\)</code> 是x在M里面的最佳逼近元。</p>
+<h3 id="关键定理-1">关键定理</h3>
+<ol>
+<li>对任何 <code>\(M\subset X\)</code> 有 <code>\(M^\perp\)</code> 是X的闭子空间</li>
+</ol>
+<p>两步：</p>
+<ul>
+<li>是子空间：验证线性运算（设 <code>\(x_1\perp y,x_2\perp y\)</code> ，基于内积双线性推导）</li>
+<li>闭：利用内积（正交）的连续性</li>
+</ul>
+<ol start="2">
+<li>对于非空集合 <code>\(\overline{spanM}^\perp=M^\perp\)</code></li>
+</ol>
+<p>两步：</p>
+<ul>
+<li>左边小： <code>\(\overline{spanM}\supset M \Rightarrow \overline{spanM}^\perp \subset M^\perp\)</code></li>
+<li>右边小：分别讨论 <code>\(y\in \overline{spanM}=spanM\cup (spanM)'\)</code></li>
+</ul>
+<ol start="3">
+<li>
+<p>正交投影唯一： <code>\(x_1-x_0=z_0-z_1\in M\cap M^\perp\)</code> 差值为零元，也就是相等</p>
+</li>
+<li>
+<p>极小化向量定理：Hilbert空间中的凸闭集存在唯一逼近</p>
+</li>
+</ol>
+<p>三个步骤：核心是平行四边形</p>
+<ul>
+<li>根据平行四边形公式，可以验证 <code>\(\lim_{n\to\infty}\|x_n-x\|=d_0\)</code> 这个点列是柯西列</li>
+<li>柯西列+空间完备性=存在命题</li>
+<li>平行四边形验证唯一性</li>
+</ul>
+<ol start="5">
+<li>投影定理：完备子空间中存在唯一投影，而且是最佳逼近</li>
+</ol>
+<h3 id="经典结论-1">经典结论</h3>
+<p>正交补一定是子空间（一般的子集不要求子空间）</p>
+<p>零元 <code>\(\theta\)</code> 和任意向量正交，而且<strong>仅有零元素成立</strong>（用于推导某个结果 <code>\(x-y=\theta\)</code> ）。</p>
+<p>注意理解 <code>\(M\cap M^\perp=\phi \quad or \quad \{\theta\}\)</code></p>
+<ul>
+<li>正交线性空间的交集还有个零元，不是空集</li>
+<li>但是如果M不是线性空间，不含零元，那么交集就是空</li>
+</ul>
+<p>正交也有连续性：通过内积连续性可以推导</p>
+<p>正交可以推出线性无关（反证法）</p>
+<p>正交投影有唯一性（所以验证投影只需要分别检查 <code>\(x_0,z\)</code> 即可）</p>
+<p>完备子空间最佳逼近也是存在唯一（完备子空间是凸闭集）</p>
+<h2 id="规范正交系">规范正交系</h2>
+<h3 id="重要概念-2">重要概念</h3>
+<p>正交系：M<strong>为不含零元</strong>的子集，任意两个不同元素都正交【只讨论至多可列个元素】</p>
+<p>规范正交系：正交系M每个元素的范数都是1</p>
+<p>Fourier系数：</p>
+<ul>
+<li><code>\(\{e_i\}_0^\infty\)</code> 是一组规范正交系</li>
+<li>元素x关于 <code>\(e_n\)</code> 的内积 <code>\(c_n=\langle x,e_n\rangle\)</code> 称为x关于 <code>\(e_n\)</code> 的Fourier系数</li>
+<li>傅里叶级数（不一定存在d 展开）： <code>\(x=\sum_{n=1}^\infty c_ne_n\)</code></li>
+</ul>
+<p>Hilbert空间中的完全规范正交系：</p>
+<ul>
+<li>定义： <code>\(\forall n \langle x,e_n\rangle=0\Rightarrow x=\theta\)</code></li>
+<li>任意 <code>\(x\in X\)</code> 有Parseval等式（Bessel不等式取等）， <code>\(\sum_{n=1}^{\infty}\left|c_{n}\right|^{2}=\|x\|^{2}\)</code></li>
+<li>任意 <code>\(x\in X\)</code> 可以写出傅里叶级数形式： <code>\(x=\sum_{n=1}^\infty c_ne_n\)</code></li>
+<li>任意两个元素的内积有 <code>\(\langle x,y\rangle=\sum_{n=1}^\infty \langle x,e_n\rangle \overline{\langle y,e_n\rangle}\)</code></li>
+</ul>
+<h3 id="关键定理-2">关键定理</h3>
+<ol>
+<li>傅里叶级数的有限项对应子空间的投影&amp;最佳逼近元</li>
+</ol>
+<p><code>\(\{e_i\}_0^\infty\)</code> 是一组规范正交系，子空间 <code>\(X_n=span\{e_1\cdots,e_n\}\)</code></p>
+<p>那么：</p>
+<p>$$
+s_n=\sum_{k=1}^n c_ne_n
+$$</p>
+<p><code>\(s_n\)</code> 是x在子空间的投影。</p>
+<p>【证明思路】投影唯一，所以只需要证明 <code>\(x-s_n\in X_n^\perp\)</code> ，也就是 <code>\(x-s_n\perp e_k \quad k=1,\cdots n\)</code></p>
+<ol start="2">
+<li>Bessel 不等式。投影的平方和不会超过x本身范数平方，从而保证了级数收敛性</li>
+</ol>
+<p>设  <code>\(\left\{e_{n}\right\}_{n=1}^{\infty}\)</code>  是内积空间  <code>\(X\)</code>  中一个规范正交系, 则对任意  <code>\(x \in X\)</code> , 成立 Bessel 不等式</p>
+<p>$$
+\sum_{n=1}^{\infty}\left|c_{n}\right|^{2} \leq|x|^{2},c_{n}=\left\langle x, e_{n}\right\rangle, n=1,2, \cdots
+$$</p>
+<p>【证明】利用勾股拆开： <code>\(\|x\|^2=\|s_n\|^2+\|x-s_n\|^2\)</code></p>
+<ol start="3">
+<li>Riesz-Fisher。设  <code>\(\left\{e_{n}\right\}_{n=1}^{\infty}\)</code>  是 <strong>Hilbert</strong> 空间  <code>\(X\)</code>  中一个规范正交系, 则对任意  <code>\(c=\left(c_{1}, c_{2}, \cdots\right) \in l^{2}\)</code> , 惟一存在  <code>\(x \in X\)</code> , 使  <code>\(c_{n}=\left\langle x, e_{n}\right\rangle, n=1,2, \cdots\)</code> , 且成立等式</li>
+</ol>
+<p>$$
+\sum_{n=1}^{\infty}\left|c_{n}\right|^{2}=|x|^{2}
+$$</p>
+<p>【证明】：需要有完备性，否则不一定有。</p>
+<ul>
+<li>级数收敛+完备得到存在性</li>
+<li>勾股定理用于唯一性</li>
+</ul>
+<ol start="4">
+<li>如果Parseval等式在某个X中稠密子集成立,则规范正交系是完全的</li>
+</ol>
+<p>【证明】</p>
+<ol start="5">
+<li>若X可分，则有至多可列的完全规范正交系</li>
+</ol>
+<p>【证明】 <code>\(X=\overline{span\{x_k\}},x_k可列个\)</code> ，那么正交化即可</p>
+<h3 id="经典结论-2">经典结论</h3>
+<p><code>\(\{e_i\}\)</code> 就是实数/复数欧式空间 <code>\(F^n\)</code> 的一组规范正交系</p>
+<p><code>\(\{e_i\}\)</code> 是 <code>\(l^2\)</code> 的规范正交系</p>
+<p>三角函数系是 <code>\(L^2[-\pi,\pi]\)</code> 的规范正交系</p>
+<p>$$
+\frac{1}{\sqrt{2\pi}},\frac{1}{\sqrt{\pi}}\cos t,\frac{1}{\sqrt{\pi}}\sin t,\cdots,\frac{1}{\sqrt{\pi}}\cos nt,\frac{1}{\sqrt{\pi}}\sin nt,\cdots
+$$</p>
+<p>根据规范正交系的表示，可以得到一个线性映射 <code>\(X\to l^2\)</code> ；在Hilbert空间，<strong>存在可列的完全规范正交系</strong>意味着有一个等距同构映射，X与 <code>\(l^2\)</code> 等距同构。</p>
+<p>内积空间可以和高代一样，进行Gram-Schmidt正交化。</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
