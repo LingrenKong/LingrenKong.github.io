@@ -1,34 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>数学 on 至诚居</title>
-    <link>/categories/%E6%95%B0%E5%AD%A6/</link>
-    <description>Recent content in 数学 on 至诚居</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/categories/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间</title>
-      <link>/functional/functional-review-chap9/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/functional/functional-review-chap9/</guid>
-      <description>第九章 内积空间和希尔伯特（Hilbert）空间 内积空间 重要概念 内积（注意共轭）：
- 非负性： \(\langle x, x\rangle \geq 0, \forall x \in X ;\langle x, x\rangle=0 \Leftrightarrow x=\theta\) 对称性： \(\langle x, y\rangle=\overline{\langle y, x\rangle}, \forall x, y \in X\) 加法： \(\left\langle x_{1}+x_{2}, y\right\rangle=\left\langle x_{1}, y\right\rangle+\left\langle x_{2}, y\right\rangle, \forall x_{1}, x_{2}, y \in X\) 数乘： \(\langle\lambda x, y\rangle=\lambda\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)  其中第3&amp;amp;4条在 \(F=\mathbb R\) 实数情况下被称作双线性。
-复数情况下，34的对称版本是：
- 加法不受影响： \(\left\langle x, y_{1}+y_{2}\right\rangle=\left\langle x, y_{1}\right\rangle+\left\langle x, y_{2}\right\rangle, \forall x,y_{1}+y_{2} \in X\) 数乘需要共轭： \(\langle x, \lambda y\rangle=\overline{\lambda}\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)  Hilbert空间：内积空间按照内积导出的范数完备（所以Hilbert空间一定是Banach空间）</description>
-    </item>
-    
-    <item>
-      <title>随机过程习题（鞅）</title>
-      <link>/exercise-collection/martingale/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/exercise-collection/martingale/</guid>
-      <description>假设 \(\left\{X_{n}, n=0,1,2, \cdots\right\}\) 是随机变量序列, 令 \(Y_{n}=\sum_{i=0}^n X_{i}, n \geq 1\) 。若 \(\left\{Y_{n}, n=0,1, \cdots\right\}\) 是关于 \(\left\{X_{n}, n=0, i, \cdots\right\}\) 的一个鞅。证明: 对任意的 \(0 \leq i \neq j, E(X_i, X_j)=0\) 。
-证：
-不妨设 \(i&amp;lt;j\) ，那么根据鞅的定义，有：
-$$ E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]=Y_{j-1} $$ 带入 \(Y_n=\sum_{i=0}^n X_{i}\) 到上面左侧式子： $$ \begin{aligned}&amp;amp;E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]\\=&amp;amp;E[\sum_{i=0}^j X_{i}\mid\sigma(X_0\cdots X_{j-1})]\quad \text{用期望线性性质}\\=&amp;amp;E[\sum_{i=0}^{j-1} X_{i}\mid\sigma(X_0\cdots X_{j-1})]+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\quad \\=&amp;amp;Y_{j-1}+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\end{aligned} $$ 所以可以得到： $$ E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]=0 $$ 接下来对于式子 \(E[X_iX_j]\) 应用重期望展开： $$ \begin{aligned}E[X_i X_j]&amp;amp;=E[E[X_i X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot E[X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot 0]=0\end{aligned} $$</description>
-    </item>
-    
-  </channel>
-</rss>

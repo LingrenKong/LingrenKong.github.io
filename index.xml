@@ -1,172 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>至诚居</title>
-    <link>/</link>
-    <description>Recent content on 至诚居</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 04 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>从Jekyll迁移到Hugo</title>
-      <link>/2022/01/04/jekyll2hugo/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/2022/01/04/jekyll2hugo/</guid>
-      <description>情况分析 说来惭愧，从之前的Hexo迁移到jekyll没多久，就又转移到了基于Blogdown的Hugo。
-主要原因还是在于，虽然jekyll对于提交比较友好，但是用着发现模板并不太好使，而且创建post不太方便，正好发现Blogdown把问题都用Rstudio安排了，而且Rmd格式和插入图片也有处理（插入到文件路径中，不是链接但是可以省掉图床工作），所以就转了。
-模板 看文档发现建议不要随便用不一样的Hugo模板，所以就保留了原来的模板，对于logo这种轻度定制的东西进行了修改。
-数据迁移 Hugo的挖墙脚确实厉害，居然提供了一个数据转换的教程，而且本身应用里面还有这样一个命令行操作：
-hugo import jekyll jekyll_root_path target_path（hugo项目的根）可惜的是这样的命令行移动不太行，是直接移动文件，和当前的作为index.md放在文件夹不是一致的，所以正好我的博客不多，就慢慢手动迁移了。</description>
-    </item>
-    
-    <item>
-      <title>泛函分析复习 | 内积空间和希尔伯特（Hilbert）空间</title>
-      <link>/functional/functional-review-chap9/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/functional/functional-review-chap9/</guid>
-      <description>第九章 内积空间和希尔伯特（Hilbert）空间 内积空间 重要概念 内积（注意共轭）：
- 非负性： \(\langle x, x\rangle \geq 0, \forall x \in X ;\langle x, x\rangle=0 \Leftrightarrow x=\theta\) 对称性： \(\langle x, y\rangle=\overline{\langle y, x\rangle}, \forall x, y \in X\) 加法： \(\left\langle x_{1}+x_{2}, y\right\rangle=\left\langle x_{1}, y\right\rangle+\left\langle x_{2}, y\right\rangle, \forall x_{1}, x_{2}, y \in X\) 数乘： \(\langle\lambda x, y\rangle=\lambda\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)  其中第3&amp;amp;4条在 \(F=\mathbb R\) 实数情况下被称作双线性。
-复数情况下，34的对称版本是：
- 加法不受影响： \(\left\langle x, y_{1}+y_{2}\right\rangle=\left\langle x, y_{1}\right\rangle+\left\langle x, y_{2}\right\rangle, \forall x,y_{1}+y_{2} \in X\) 数乘需要共轭： \(\langle x, \lambda y\rangle=\overline{\lambda}\langle x, y\rangle, \forall \lambda \in F, \forall x, y \in X\)  Hilbert空间：内积空间按照内积导出的范数完备（所以Hilbert空间一定是Banach空间）</description>
-    </item>
-    
-    <item>
-      <title>测试页面</title>
-      <link>/python-intro-tutorial/testing/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/python-intro-tutorial/testing/</guid>
-      <description>本页为Python教程在博客展开的测试页面~</description>
-    </item>
-    
-    <item>
-      <title>随机过程习题（鞅）</title>
-      <link>/exercise-collection/martingale/</link>
-      <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/exercise-collection/martingale/</guid>
-      <description>假设 \(\left\{X_{n}, n=0,1,2, \cdots\right\}\) 是随机变量序列, 令 \(Y_{n}=\sum_{i=0}^n X_{i}, n \geq 1\) 。若 \(\left\{Y_{n}, n=0,1, \cdots\right\}\) 是关于 \(\left\{X_{n}, n=0, i, \cdots\right\}\) 的一个鞅。证明: 对任意的 \(0 \leq i \neq j, E(X_i, X_j)=0\) 。
-证：
-不妨设 \(i&amp;lt;j\) ，那么根据鞅的定义，有：
-$$ E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]=Y_{j-1} $$ 带入 \(Y_n=\sum_{i=0}^n X_{i}\) 到上面左侧式子： $$ \begin{aligned}&amp;amp;E[Y_{j}\mid\sigma(X_0\cdots X_{j-1})]\\=&amp;amp;E[\sum_{i=0}^j X_{i}\mid\sigma(X_0\cdots X_{j-1})]\quad \text{用期望线性性质}\\=&amp;amp;E[\sum_{i=0}^{j-1} X_{i}\mid\sigma(X_0\cdots X_{j-1})]+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\quad \\=&amp;amp;Y_{j-1}+E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]\end{aligned} $$ 所以可以得到： $$ E[X_{j}\mid\sigma(X_0\cdots X_{j-1})]=0 $$ 接下来对于式子 \(E[X_iX_j]\) 应用重期望展开： $$ \begin{aligned}E[X_i X_j]&amp;amp;=E[E[X_i X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot E[X_j\mid\sigma(X_0\cdots X_{j-1})]]\\&amp;amp;=E[X_i \cdot 0]=0\end{aligned} $$</description>
-    </item>
-    
-    <item>
-      <title>2022 新年愿景</title>
-      <link>/2022/01/01/2022-new-years-resolutions/</link>
-      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/2022/01/01/2022-new-years-resolutions/</guid>
-      <description>2022 新年愿景 ~
-愿望 希望可以快乐生活，帮到更多的人。
-创造 希望可以成为开源社区的开发者，做一些确实能够帮助他人的轮子
-健康 希望身体健康，早睡早起~
-生活 多看看大好河山，走走，拍拍</description>
-    </item>
-    
-    <item>
-      <title>ggplot2 踩坑 | ylim 函数</title>
-      <link>/2021/12/23/ggplot2-ylim/</link>
-      <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/2021/12/23/ggplot2-ylim/</guid>
-      <description>ggplot2::ylim看起来很好很直接，但是实际上却会删去你的数据！
-ggplot2踩坑比如我们研究一个这样的概率模型（例子来自于贝特朗奇论的一种模式）：
-\[p(x)=\frac{x}{\sqrt{1-x^2}},\quad x\in [0,1]\]
-set.seed(42)x = runif(10000,min=0,max=1)f = function(x){sqrt(1-(x-1)^2)}p = f(x)library(ggplot2)df &amp;lt;- data.frame(x=x,p=p)那么\(x\rightarrow1\)的尾部就会出现数据趋向于无穷的情况，导致图例和真实数据模拟的直方图、密度图不一致。如果直接用ylim 确实可以控制输出范围，但是结果就如下图区别，导致原始数据丢失，其他图片也不对了。
-ggplot(df, aes(x=p)) +geom_histogram(aes(y=..density..),bins = 50) + geom_density(alpha=.2, size=0.7) + geom_vline(aes(xintercept=sqrt(3)/2),color=&amp;quot;blue&amp;quot;, linetype=&amp;quot;dashed&amp;quot;, size=1)+geom_function(aes(x=x),fun = function(y){y/(sqrt(1-y^2))},colour = &amp;quot;red&amp;quot;,linetype=&amp;quot;dotted&amp;quot;, size=1) +ylim(0,5)## Warning: Removed 2 rows containing missing values (geom_bar).## Warning: Removed 2 row(s) containing missing values (geom_path).</description>
-    </item>
-    
-    <item>
-      <title>寒假Python修行-3</title>
-      <link>/python-intro-tutorial/python-3/</link>
-      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/python-intro-tutorial/python-3/</guid>
-      <description>课程内容控制结构（条件、循环）条件if 条件1:操作1elif 条件2:操作2else:操作3其中elif可以无限个，只有if是必须有且仅有一个，else至多一个
-循环while 条件：操作else:其实可以有个else但是不常用for 变量/变量组 in 序列:操作虽然也被称为for，但是和C的有很大区别–操作对象是可迭代对象。
-善于利用break和continue来组织你的代码，注意break只能跳出一重循环，所以对于多重循环可以巧妙利用函数的return来跳出，这个会在函数部分讲到。
-一些 Python 特殊语法列表生成式list-comprehensions官方文档：list-comprehensions
-如何写0-9的平方列表：
-squares = []for x in range(10):squares.append(x**2)squares = list(map(lambda x: x**2, range(10)))squares = [x**2 for x in range(10)]squares## [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]这种写法支持1个for+0个或者多个for/if语句：</description>
-    </item>
-    
-    <item>
-      <title>寒假Python修行-2</title>
-      <link>/python-intro-tutorial/python-2/</link>
-      <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/python-intro-tutorial/python-2/</guid>
-      <description>上节课习题解答 ~
-课程内容 基本数据类型 可以看菜鸟教程，或者看RUC信息学院一位师兄写的介绍
-输入输出 input函数： Python提供了input()内置函数从标准输入读入一行文本，默认的标准输入是键盘。
-接受一个参数作为打出的注释，没有其他可变内容。
-字符串格式化输出： Python尽管有着十分友好的输出语法print，但是有些时候还是需要格式化输出字符串的功能。
-在Python中主要有四种格式化字符串的方法：
-第一种是类似于C的方法，在旧Python2中常用
-注意和C的区别在于%后面只接受单一参数，多个输入要用元组打包。如果担心参数太多容易乱，可以使用关键字和字典
-name = &amp;#39;李狗蛋&amp;#39; age = 18 print(&amp;#34;我的名字是%s&amp;#34;%name)#在字符后面接上%，这个整体是一个格式化字符串，不一定要print出来 t = &amp;#34;我的名字是%s&amp;#34;%name print(&amp;#39;格式化作用于字符串而不是print:&amp;#39;,t) print(&amp;#34;我的名字是%s，我的年龄是%d&amp;#34;%(name,age))#元组打包格式化 print(&amp;#34;我的名字是%(na)s，我的年龄是%(ag)d&amp;#34;%{&amp;#39;ag&amp;#39;:age,&amp;#39;na&amp;#39;:name})#注意前面是（）括号，后面字典才是{} 第二种是Python3字符串方法
-这是通过为字符串对象内置.format方法实现的
-可以用help(&amp;quot; &amp;quot;.format)/help(str.format)直接看函数简介
- str整体的文档在https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str 格式化字符串的网址在https://docs.python.org/3/library/string.html#formatstrings  print(&amp;#34;count {0}{1}{2}&amp;#34;.format(1,2,3)) # format()内的东西采用逗号分隔，相当于作为一个元组输入，而前面{}里面的序号对应元组的位序 print(&amp;#34;count {}{}{}&amp;#34;.format(1,2,3))# 不写就按默认顺序 print(&amp;#34;{0[1]}{1.__doc__}&amp;#34;.format([1,2],&amp;#34;lower&amp;#34;))#输入数据对象可以再进行.(调用属性)或者[]操作 # *对可迭代对象的解包 https://www.python.org/dev/peps/pep-3132/ &amp;#34;&amp;#34;&amp;#34; python的len函数是一个很有用的函数，对字符也有多个功能 &amp;#34;&amp;#34;&amp;#34; string = &amp;#34;中文字符串的len😀&amp;#34; print(len(string),&amp;#39;中文英文都是按一个字计算的&amp;#39;) #10 print(len(string.encode(&amp;#39;utf-8&amp;#39;)),&amp;#39;中文6*3+英文3*1+1*4=25（英文不会被转换为utf8代码）&amp;#39;) &amp;#34;&amp;#34;&amp;#34; 字符串对象有几个比较重要的内置方法 &amp;#34;&amp;#34;&amp;#34; s = &amp;#34;I love programming&amp;#34; s.title()# &amp;#39;I Love Programming&amp;#39; s.lower()# &amp;#39;i love programming&amp;#39; s.</description>
-    </item>
-    
-    <item>
-      <title>寒假Python修行DAY1：Python学习建议</title>
-      <link>/python-intro-tutorial/python-1/</link>
-      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/python-intro-tutorial/python-1/</guid>
-      <description>课程内容 整体建议   Python社区很广，学不完的，所以请按需学习，掌握搜索技巧
-  学会使用论坛文档的资源
- 搜索引擎（推荐bing） 论坛与博客：CSDN/Stack Overflow 英文看得懂（不是英语好）很重要 适当合理使用文档    自己锻炼自己（具体问题具体分析）
- kaggle学习与比赛 刷LeetCode等 写个人博客    欢迎关注RUC统计调查协会: 关于package 参考：菜鸟教程Python3
-安装和虚拟环境 conda换源加速：
-conda clean -i 去掉之前的源conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/rconda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/proconda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/特殊的源（完整版见官网，forge比较常见，Pytorch深度学习要用）conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/ conda config --set show_channel_urls yes 有了这个就可以找到.</description>
-    </item>
-    
-    <item>
-      <title>np学习笔记--随机数功能</title>
-      <link>/2020/05/01/np-rand/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/01/np-rand/</guid>
-      <description>文档太多，反而是python的help效果更好~
-这里的Python基于Rmd的reticulate包。
-模块总览import numpy as npnp.random.seed(42)np的random库是一个功能很强的库，可以替代Python本身的random（所以不要同时导入这两个）
-通过查看包的__init__.py可以了解其中的功能（有点多）
-其中分为几块：
-Utility functions：效用函数？（大概就是常用的意思吧）Compatibility function：兼容功能（相对比较新的函数）Univariate distributions：单变量分布生成Multivariate distributions：多变量分布生成Standard distributions：标准分布（如标准正态、标准\(\Gamma\)分布等）Internal functions：检查随机数生成器的当前状态对于指定分布的生产，在使用的时候通过文档查询即可，但是常用的随机数操作功能需要熟练使用，因此本文学习常用的。
-========================Random Number Generation============================================ =========================================================Utility functions==============================================================================random_sample Uniformly distributed floats over ``[0, 1)``.random Alias for `random_sample`.bytes Uniformly distributed random bytes.random_integers Uniformly distributed integers in a given range.permutation Randomly permute a sequence / generate a random sequence.</description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>好耶~</description>
-    </item>
-    
-    <item>
-      <title>我的教程</title>
-      <link>/tutorial/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tutorial/</guid>
-      <description>Python基础教程</description>
-    </item>
-    
-    <item>
-      <title>我的笔记</title>
-      <link>/note/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/note/</guid>
-      <description>泛函分析</description>
-    </item>
-    
-  </channel>
-</rss>
